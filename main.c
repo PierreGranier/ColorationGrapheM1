@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
+#include "main.h"
+
 #define TAILLE_MAX 1000
 
 int main(int argc, char *argv[]) {
