@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 	int test = 1234;
 	FILE* fichier = NULL;
 	fichier = fopen("test.txt", "r");	
-	#define SUPER test
+	#define SUPER test //c degueu lol
     if (fichier != NULL)	{	//Ouverture ficher = OK
 		//int car = 0;
 		char chaine[TAILLE_MAX] = "";
