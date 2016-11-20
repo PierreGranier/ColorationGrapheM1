@@ -9,7 +9,7 @@ main.exe: main.c
 	@echo "# Compilation de $^"
 	gcc -o main.out $< $(CFLAGS) $(OFLAGS)
 
-launch: main.out
+launch: main.out test.txt
 	@echo "# Execution de $^"
 	./$^
 	
