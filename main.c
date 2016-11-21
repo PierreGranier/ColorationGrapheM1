@@ -5,7 +5,7 @@
 
 #include "main.h"
 
-#define TAILLE_MAX 100
+#define TAILLE_MAX 25
 
 
 int main(int argc, char *argv[]) {
@@ -20,13 +20,6 @@ int main(int argc, char *argv[]) {
 		strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
 		printf("Lecture du fichier %s\n", nom_fichier);
 	}
-	
-	
-//	int N;			//Nombre de sommets
-//	int degre;		//Degre max
-
-//	int test = 1234;
-//	#define SUPER test //c degueu lol
 
 	FILE* fichier;
 	fichier = fopen(nom_fichier, "r");
@@ -35,23 +28,12 @@ int main(int argc, char *argv[]) {
 		char ligne[TAILLE_MAX];
 
 		while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
-			// int car;
-			// puts(ligne);
-
 			if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
 				char nb_sommets[TAILLE_MAX] = "";
 				char nb_aretes[TAILLE_MAX] = "";
 				int i;
 				for(i=6; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
-					nb_sommets[i-6] = ligne[i];
-					/*if(isdigit(ligne[i])) {
-						printf("%c", ligne[i]);
-						strcat(nb_sommets, &ligne[i]);
-					}
-					if(ligne[i] == ' ') {
-						printf("ok");			
-						//strcat(atoi(ligne[i]);
-					}*/
+					nb_sommets[i-6] = ligne[i];	//nb_sommet est une chaine
 				}
 				int j = ++i;
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
@@ -81,24 +63,6 @@ int main(int argc, char *argv[]) {
 				// ajouter_arete(premier_sommet, deuxieme_sommet);
 			}
 		}
-
-
-		/*while(fgets(ligne, TAILLE_MAX, fichier)) {		//lecture des lignes et stockage dans ligne
-
-			printf("tour %d\n", i);
-			++i;
-			
-			if(ligne[0] == 'p') {
-				char* nb_sommets = "";
-				for(car = 0; car != 32; car = fgetc(fichier)) {			// 32 = espace 
-					printf("car = %c\n", car);
-					//sprintf(nb_sommets, car);
-					//printf("nb_sommets = %s\n", nb_sommets);
-					
-				}
-				N = strtol(nb_sommets, NULL, 10);
-			}*/				
-		//printf("Nombre de sommets = %d\n", N);
 	}
 	else					// Echec de l'ouverture du fichier
 	{
