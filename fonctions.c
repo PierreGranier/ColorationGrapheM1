@@ -27,12 +27,12 @@ void initialiser_matrices() {
 	}
 }
 
-void afficher_matrice_aretes(int div_par) {
+void afficher_matrice_aretes(int pourcentage_visible) {
 	printf("\n\n########################################\n");
-	printf("# MATRICE ARETES\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%\n########################################\n\n", NOMBRE_DE_SOMMETS, NOMBRE_DE_SOMMETS, 100/div_par);
+	printf("# MATRICE ARETES\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%\n########################################\n\n", NOMBRE_DE_SOMMETS, NOMBRE_DE_SOMMETS, pourcentage_visible);
 	
-	for (int i = 0; i < NOMBRE_DE_SOMMETS/div_par; ++i) {
-		// for (int j = 0; j < NOMBRE_DE_SOMMETS/div_par; ++j)
+	for (int i = 0; i < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++i) {
+		// for (int j = 0; j < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++j)
 		for (int j = 0; j <= i; ++j)
 			(i == j) ? printf("\\") : printf("%c ", MATRICE_ARETES[i][j]);
 		printf("\n");
@@ -40,12 +40,12 @@ void afficher_matrice_aretes(int div_par) {
 	printf("\n");
 }
 
-void afficher_matrice_couleurs(int div_par) {
+void afficher_matrice_couleurs(int pourcentage_visible) {
 	printf("\n\n########################################\n");
-	printf("# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%\n########################################\n\n", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, 100/div_par);
+	printf("# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%\n########################################\n\n", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, pourcentage_visible);
 	
-	for (int i = 0; i < NOMBRE_DE_COULEURS/div_par; ++i)
-		for (int j = 0; j < NOMBRE_DE_SOMMETS/div_par; ++j)
+	for (int i = 0; i < NOMBRE_DE_COULEURS*pourcentage_visible/100; ++i)
+		for (int j = 0; j < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++j)
 			printf("%c ", MATRICE_COULEURS[i][j]);
 		printf("\n");
 }
@@ -60,6 +60,14 @@ void ajouter_arete(int indice1, int indice2) {
 	MATRICE_COULEURS[NOMBRE_DE_COULEURS] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char));
 	++NOMBRE_DE_COULEURS;
 */
+
+void bob() {
+
+}
+
+void tibo() {
+	
+}
 
 void liberer_matrices() {
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {

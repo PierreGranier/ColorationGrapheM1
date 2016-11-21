@@ -16,8 +16,8 @@ void initialiser_matrices();
 /*
  * Afficher les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
  */
-void afficher_matrice_aretes(int div_par);
-void afficher_matrice_couleurs(int div_par);
+void afficher_matrice_aretes(int pourcentage_visible);
+void afficher_matrice_couleurs(int pourcentage_visible);
 
 /*
  * Met à 1 le char (indice1, indice2) de la matrice des aretes
@@ -25,9 +25,14 @@ void afficher_matrice_couleurs(int div_par);
 void ajouter_arete(int indice1, int indice2);
 
 /**
- * Faire plusieurs algos de coloriage
+ * Algo de coloriage by Bob
  */
-void colorier();
+void bob();
+
+/**
+ * Algo de coloriage by Tibo
+ */
+void tibo();
 
 /*
  * Libère la mémoire occupée par les matrices
