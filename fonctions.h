@@ -27,7 +27,7 @@ void ajouter_arete(int indice1, int indice2);
 /**
  * Algo de coloriage by Bob
  */
-void bob();
+void meilleur_coloriage_de_ouf_lol_opti_tupeuxpastestmdr();
 
 /**
  * Algo de coloriage by Tibo
