@@ -39,20 +39,8 @@ int main(int argc, char *argv[]) {
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					nb_aretes[i-j] = ligne[i];
 				}
-				//printf("nb de sommets = %s\n", nb_sommets);
-				//printf("nb d'arêtes = %s\n", nb_aretes);
 				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
 				NOMBRE_D_ARETES = atoi(nb_aretes);
-				SOMMETS = (Sommet*)malloc(NOMBRE_DE_SOMMETS * sizeof(Sommet*)); // dimensionne le tableau
-				MATRICE_GRAPH = (char**)malloc(NOMBRE_DE_SOMMETS * sizeof(char*)); // dimensionne le tableau à deux dimensions
-				for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // dimensionne chaque ligne à une dimension
-					MATRICE_GRAPH[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char));
-				}
-				for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // toutes les cases des lignes à '0'
-					for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
-						MATRICE_GRAPH[i][j] = '0';
-					}
-				}
 			} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
 				char premier_sommet[TAILLE_MAX] = "";
 				char deuxieme_sommet[TAILLE_MAX] = "";
@@ -64,7 +52,6 @@ int main(int argc, char *argv[]) {
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					deuxieme_sommet[i-j] = ligne[i];
 				}
-				//printf("%s -> %s %s", ligne, premier_sommet, deuxieme_sommet);
 				ajouter_arete(atoi(premier_sommet), atoi(deuxieme_sommet));
 			}
 		}
@@ -78,6 +65,8 @@ int main(int argc, char *argv[]) {
 	free(nom_fichier);
 
 	/* CODE */
+
+	initialiser_matrices();
 
 	//afficher_sommets();
 

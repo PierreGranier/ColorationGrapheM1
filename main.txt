@@ -1,5 +1,9 @@
 
 
+matrice de taille nb_sommets*nb_sommets pour les aretes (1 ou 0) remplie de moitié seulement
+matrice de taille nb_couleurs*nb_sommets pour les couleurs (1 ou 0)
+
+
 // technique de coloriage :
 // commencer par le sommet qui a le plus de freres
 // lui mettre une couleur de depart (0)
@@ -8,30 +12,5 @@
 
 
 
-
-
 https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/chapitre3.html
 https://openclassrooms.com/courses/apprenez-a-programmer-en-c/les-chaines-de-caracteres
-
-
-
-
-j'ai trouvé ça sur internet
-size_t FindIndex( const int a[], size_t size, int value )
-{
-    size_t index = 0;
-
-    while ( index < size && a[index] != value ) ++index;
-
-    return ( index == size ? -1 : index );
-}
-
-int indice_de(char* label) {
-	int index = 0;
-	while (index < NOMBRE_DE_SOMMETS) {
-		if (SOMMETS[index].label == atoi(label))
-			return index;
-		++index;
-	}
-	return -1;
-}

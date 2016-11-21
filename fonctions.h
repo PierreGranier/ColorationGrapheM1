@@ -1,49 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-// STRUCTURE
-
-typedef struct sommet {
-	int label;
-	int poids;
-	int couleur;
-} Sommet;
-
-
 // VARIABLES GLOBALES
 
 int NOMBRE_DE_SOMMETS, NOMBRE_D_ARETES;
-Sommet *SOMMETS;
-char **MATRICE_GRAPH; // matrice avec des char
-
+int NOMBRE_DE_COULEURS = 0;
+char **MATRICE_ARETES, **MATRICE_COULEURS; // matrices avec des char 1 ou 0, 0 par défaut
 
 // FONCTIONS
 
 /*
- * Retourne l'indice du sommet correspondant au label, -1 sinon
+ * Alloue la mémoire suffisante et remplie les matrices de 0
  */
-int indice_de(int label);
+void initialiser_matrice();
 
 /*
- * Appele la fonction d'ajout de sommet pour le label1 et le label2
- * Met à 1 les bits (i,j) et (j,i) de la matrice, i et j étant respectivement l'indice du sommet correspondant au label1 et l'indice du sommet correspondant au label2
+ * Met à 1 le char (indice1, indice2) de la matrice des aretes
  */
-void ajouter_arete(int label1, int label2);
-
-/*
- * Initialise un sommet à partir d'un label
- * L'ajoute au tableau des sommets s'il n'y a pas déjà de sommet correspondant à ce label
- */
-void ajouter_sommet(int label);
+void ajouter_arete(int indice1, int indice2);
 
 /*
  * Affiche les labels de tous les sommets
-*/
+ */
 void afficher_sommets();
 
-
 /**
- * en faire plusieurs
+ * Faire plusieurs algos
  */
 void colorier();
