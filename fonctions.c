@@ -26,9 +26,9 @@ void initialiser_matrices() {
 	}
 }
 
-void ajouter_arete(int label1, int label2) {
-	MATRICE_GRAPH[label1][label2] = 1;
-	//SOMMETS[label2][label1] = 1;    //pas nécéssaire car graphe non orienté
+void ajouter_arete(int indice1, int indice2) {
+    MATRICE_GRAPH[indice1][indice2] = 1;
+    //SOMMETS[label2][label1] = 1;    //pas nécéssaire car graphe non orienté
 }
 
 // quand on coloriera, il faudra re-allouer de la mémoire pour chaque nouvelle couleur
