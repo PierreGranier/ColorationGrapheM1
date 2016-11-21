@@ -69,8 +69,8 @@ int main(int argc, char *argv[]) {
 
 	/* CODE */
 
-	afficher_matrice_aretes(3);
-	afficher_matrice_couleurs(2);
+	afficher_matrice_aretes(4);
+	afficher_matrice_couleurs(4);
 
 	liberer_matrices();
 
