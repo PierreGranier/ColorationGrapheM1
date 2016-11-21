@@ -8,7 +8,15 @@
 #define TAILLE_MAX 25
 
 
+void afficher_sommets() {
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		printf("test %s", SOMMETS[i].label);
+	}
+}
+
 int main(int argc, char *argv[]) {
+
+	/* LECTURE DU FICHIER */
 
 	char* nom_fichier;
 
@@ -39,8 +47,8 @@ int main(int argc, char *argv[]) {
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					nb_aretes[i-j] = ligne[i];
 				}
-				printf("nb de sommets = %s\n", nb_sommets);
-				printf("nb d'arêtes = %s\n", nb_aretes);
+				//printf("nb de sommets = %s\n", nb_sommets);
+				//printf("nb d'arêtes = %s\n", nb_aretes);
 				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
 				NOMBRE_D_ARETES = atoi(nb_aretes);
 				SOMMETS = (Sommet*)malloc(NOMBRE_DE_SOMMETS * sizeof(Sommet*)); // dimensionne le tableau
@@ -59,7 +67,7 @@ int main(int argc, char *argv[]) {
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					deuxieme_sommet[i-j] = ligne[i];
 				}
-				printf("%s -> %s %s", ligne, premier_sommet, deuxieme_sommet);
+				//printf("%s -> %s %s", ligne, premier_sommet, deuxieme_sommet);
 				// ajouter_arete(premier_sommet, deuxieme_sommet);
 			}
 		}
@@ -69,11 +77,12 @@ int main(int argc, char *argv[]) {
 		printf("Impossible d'ouvrir le fichier %s", nom_fichier);
 	}
 
-
 	fclose(fichier);		// On ferme le fichier
 	free(nom_fichier);
 
-	/* ... */
+	/* CODE */
+
+	afficher_sommets();
 
 	free(SOMMETS);
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
