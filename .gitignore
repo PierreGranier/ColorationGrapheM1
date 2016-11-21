@@ -1,1 +1,5 @@
+#compilation
 *.out
+
+#vscode
+.vscode/
