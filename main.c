@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "fonctions.h"
+#include "main.h"
 
 #define TAILLE_MAX 25
 
