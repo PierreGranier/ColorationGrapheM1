@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "fonctions.h"
-#include "main.h"
 
 #define TAILLE_MAX 25
 
@@ -55,9 +54,9 @@ int main(int argc, char *argv[]) {
 				for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // dimensionne chaque ligne à une dimension
 					MATRICE_GRAPH[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char));
 				}
-				for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+				for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // toutes les cases des lignes à '0'
 					for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
-						MATRICE_GRAPH[i][j] = '0'; // toutes les lignes à '0'
+						MATRICE_GRAPH[i][j] = '0';
 					}
 				}
 			} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
