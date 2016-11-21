@@ -4,7 +4,8 @@
 
 #include "fonctions.h"
 
-#define TAILLE_MAX 25
+#define TAILLE_MAX 50
+
 
 int main(int argc, char *argv[]) {
 
@@ -25,9 +26,10 @@ int main(int argc, char *argv[]) {
 	fichier = fopen(nom_fichier, "r");
 
 	if (fichier != NULL) {		// Ouverture ficher = OK
-		char ligne[TAILLE_MAX];
+		char ligne[TAILLE_MAX] = "";
 
 		while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
+			//puts(ligne);
 			if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
 				char nb_sommets[TAILLE_MAX] = "";
 				char nb_aretes[TAILLE_MAX] = "";
@@ -41,6 +43,7 @@ int main(int argc, char *argv[]) {
 				}
 				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
 				NOMBRE_D_ARETES = atoi(nb_aretes);
+				initialiser_matrices();
 			} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
 				char premier_sommet[TAILLE_MAX] = "";
 				char deuxieme_sommet[TAILLE_MAX] = "";
@@ -66,15 +69,10 @@ int main(int argc, char *argv[]) {
 
 	/* CODE */
 
-	initialiser_matrices();
+	afficher_matrice_aretes(3);
+	afficher_matrice_couleurs(2);
 
-	//afficher_sommets();
-
-	free(SOMMETS);
-	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-		free(MATRICE_GRAPH[i]);
-	}
-	free(MATRICE_GRAPH);
+	liberer_matrices();
 
 	return EXIT_SUCCESS;
 }

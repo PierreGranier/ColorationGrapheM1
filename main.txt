@@ -1,6 +1,6 @@
 
 
-matrice de taille nb_sommets*nb_sommets pour les aretes (1 ou 0) remplie de moitié seulement
+matrice de taille nb_sommets*nb_sommets pour les aretes (1 ou 0), une seule moitié lue et écrite : la moitiée basse/gauche (l'autre moitié c'est des 0)
 matrice de taille nb_couleurs*nb_sommets pour les couleurs (1 ou 0)
 
 
