@@ -57,8 +57,8 @@ int main(int argc, char *argv[]) {
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					nb_aretes[i-j] = ligne[i];
 				}
-				printf("nb de sommets = %s\n", nb_sommets); 
-				printf("nb d'arêtes = %s\n", nb_aretes); 
+				printf("nb de sommets = %s\n", nb_sommets);
+				printf("nb d'arêtes = %s\n", nb_aretes);
 				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
 				NOMBRE_D_ARETES = atoi(nb_aretes);
 				SOMMETS = (Sommet*)malloc(NOMBRE_DE_SOMMETS * sizeof(Sommet*)); // dimensionne le tableau
