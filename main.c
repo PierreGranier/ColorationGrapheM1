@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 #include "main.h"
-
+#include "fonctions.h"
 #define TAILLE_MAX 25
 
 
@@ -68,6 +68,10 @@ int main(int argc, char *argv[]) {
 					deuxieme_sommet[i-j] = ligne[i];
 				}
 				//printf("%s -> %s %s", ligne, premier_sommet, deuxieme_sommet);
+				// ajouter_arete(premier_sommet, deuxieme_sommet);
+				int prem_som = atoi(premier_sommet);
+				int deux_som = atoi(deuxieme_sommet);
+				// ajouter_arete(prem_som, deux_som, MATRICE_GRAPH, SOMMETS);	//fonctions.c 
 				// ajouter_arete(premier_sommet, deuxieme_sommet);
 			}
 		}
