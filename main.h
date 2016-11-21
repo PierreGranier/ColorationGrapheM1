@@ -44,7 +44,13 @@ void ajouter_sommet(char* label);
  *
  */
 void colorier();
+// en faire plusieurs
 
+
+// commencer par le sommet qui a le plus de freres
+// lui mettre une couleur de depart (0)
+// ses freres avec une couleur sommet.couleur+1
+// rappeller la fonction sur chaque sommet
 
 
 
