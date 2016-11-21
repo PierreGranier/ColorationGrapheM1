@@ -1,16 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-#include "main.h"
 #include "fonctions.h"
-#define TAILLE_MAX 25
 
+#define TAILLE_MAX 25
 
 void afficher_sommets() {
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-		printf("test %s", SOMMETS[i].label);
+		printf("%d", SOMMETS[i].label);
 	}
 }
 
@@ -52,9 +50,14 @@ int main(int argc, char *argv[]) {
 				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
 				NOMBRE_D_ARETES = atoi(nb_aretes);
 				SOMMETS = (Sommet*)malloc(NOMBRE_DE_SOMMETS * sizeof(Sommet*)); // dimensionne le tableau
-				MATRICE_GRAPH = (int**)malloc(NOMBRE_DE_SOMMETS * sizeof(int*)); // dimensionne le tableau à deux dimensions
+				MATRICE_GRAPH = (char**)malloc(NOMBRE_DE_SOMMETS * sizeof(char*)); // dimensionne le tableau à deux dimensions
+				for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // dimensionne chaque ligne à une dimension
+					MATRICE_GRAPH[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char));
+				}
 				for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-					MATRICE_GRAPH[i] = (int*)calloc(NOMBRE_DE_SOMMETS, sizeof(int)); // toutes les lignes à 0 grâce à calloc
+					for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
+						MATRICE_GRAPH[i][j] = '0'; // toutes les lignes à '0'
+					}
 				}
 			} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
 				char premier_sommet[TAILLE_MAX] = "";
@@ -68,11 +71,7 @@ int main(int argc, char *argv[]) {
 					deuxieme_sommet[i-j] = ligne[i];
 				}
 				//printf("%s -> %s %s", ligne, premier_sommet, deuxieme_sommet);
-				// ajouter_arete(premier_sommet, deuxieme_sommet);
-				int prem_som = atoi(premier_sommet);
-				int deux_som = atoi(deuxieme_sommet);
-				// ajouter_arete(prem_som, deux_som, MATRICE_GRAPH, SOMMETS);	//fonctions.c 
-				// ajouter_arete(premier_sommet, deuxieme_sommet);
+				ajouter_arete(atoi(premier_sommet), atoi(deuxieme_sommet));
 			}
 		}
 	}
@@ -86,7 +85,7 @@ int main(int argc, char *argv[]) {
 
 	/* CODE */
 
-	afficher_sommets();
+	//afficher_sommets();
 
 	free(SOMMETS);
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
