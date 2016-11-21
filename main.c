@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 					deuxieme_sommet[i-j] = ligne[i];
 				}
 				//printf("%s -> %s %s", ligne, premier_sommet, deuxieme_sommet);
-				ajouter_arete(atoi(premier_sommet), atoi(deuxieme_sommet));
+				ajouter_arete(atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);		//le -1 sert parce que le tableau commence à 0 contrairement au num du sommet 
 			}
 		}
 	}

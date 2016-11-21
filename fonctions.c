@@ -8,8 +8,8 @@ int indice_de(int label) {
     return 0;
 }
 
-void ajouter_arete(int label1, int label2) {
-    MATRICE_GRAPH[label1][label2] = 1;
+void ajouter_arete(int indice1, int indice2) {
+    MATRICE_GRAPH[indice1][indice2] = 1;
     //SOMMETS[label2][label1] = 1;    //pas nécéssaire car graphe non orienté
 }
 
