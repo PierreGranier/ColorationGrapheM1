@@ -6,12 +6,6 @@
 
 #define TAILLE_MAX 25
 
-void afficher_sommets() {
-	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-		printf("%d", SOMMETS[i].label);
-	}
-}
-
 int main(int argc, char *argv[]) {
 
 	/* LECTURE DU FICHIER */

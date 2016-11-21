@@ -37,6 +37,12 @@ void ajouter_arete(int label1, int label2);
  */
 void ajouter_sommet(int label);
 
+/*
+ * Affiche les labels de tous les sommets
+*/
+void afficher_sommets();
+
+
 /**
  * en faire plusieurs
  */
