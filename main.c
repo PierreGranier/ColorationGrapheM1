@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 #include "main.h"
-#include "fonctions.h"
+#include "fonctions.c"
 #define TAILLE_MAX 25
 
 

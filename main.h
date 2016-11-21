@@ -32,7 +32,7 @@ int indice_de(char* label);
  * Appele la fonction d'ajout de sommet pour le label1 et le label2
  * Met à 1 les bits (i,j) et (j,i) de la matrice, i et j étant respectivement l'indice du sommet correspondant au label1 et l'indice du sommet correspondant au label2
  */
-void ajouter_arete(char* label1, char* label2);
+//void ajouter_arete(char* label1, char* label2);
 
 /*
  * Initialise un sommet à partir d'un label
