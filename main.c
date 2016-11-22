@@ -78,7 +78,7 @@ ajouter_couleur(1, 4); // triple conflit pour l'indice 1 : -2
 	afficher_matrice_aretes(20);
 	afficher_matrice_couleurs(20);
 
-	// format_standard_matrice_aretes();
+	format_standard_matrice_aretes();
 	format_standard_matrice_couleurs();
 
 	// appeler l'algo de coloriage ici

@@ -64,7 +64,7 @@ void afficher_matrice_couleurs(int pourcentage_visible) {
 
 
 void format_standard_matrice_aretes() {
-	printf("c col %d %d\n", NOMBRE_DE_SOMMETS, NOMBRE_D_ARETES);
+	printf("p col %d %d\n", NOMBRE_DE_SOMMETS, NOMBRE_D_ARETES);
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j <= i; ++j) {
 			if (MATRICE_ARETES[i][j] == '1') printf("e %d %d\n", i+1, j+1);
