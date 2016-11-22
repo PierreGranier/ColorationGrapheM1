@@ -9,32 +9,35 @@ char **MATRICE_ARETES, **MATRICE_COULEURS; // matrices avec des char 1 ou 0, 0 p
 // FONCTIONS
 
 /*
- * Alloue la mémoire suffisante et remplie les matrices de 0
+ * Alloue la mémoire suffisante pour les matrices et les remplie de '0'
+ * Libère la mémoire occupée par les matrices
  */
 void initialiser_matrices();
+void liberer_matrices();
 
 /*
- * Afficher les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
+ * Affiche les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
  */
 void afficher_matrice_aretes(int pourcentage_visible);
 void afficher_matrice_couleurs(int pourcentage_visible);
 
 /*
- * Met à 1 le char (indice1, indice2) de la matrice des aretes
+ * Retourne une chaine de charactères de la matrice des arêtes et des couleurs au format standard
  */
+void format_standard_matrice_aretes();
+void format_standard_matrice_couleurs();
+
+/*
+ * Met à '1' le char (indice1, indice2) de la matrice des aretes
+ * Met à '1' le char (indice_sommet, indice_couleur) de la matrice des couleurs
+ */
+void meilleur_coloriage_de_ouf_lol_opti_tupeuxpastestmdr();
 void ajouter_arete(int indice1, int indice2);
+void ajouter_couleur(int indice_sommet, int indice_couleur);
 
 /**
  * Algo de coloriage by Bob
- */
-void meilleur_coloriage_de_ouf_lol_opti_tupeuxpastestmdr();
-
-/**
  * Algo de coloriage by Tibo
  */
+void bob();
 void tibo();
-
-/*
- * Libère la mémoire occupée par les matrices
- */
-void liberer_matrices();

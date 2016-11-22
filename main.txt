@@ -1,6 +1,6 @@
 
 
-matrice de taille nb_sommets*nb_sommets pour les aretes (1 ou 0), une seule moitié lue et écrite : la moitiée basse/gauche (l'autre moitié c'est des 0)
+matrice de taille nb_sommets*nb_sommets pour les aretes (1 ou 0)
 matrice de taille nb_couleurs*nb_sommets pour les couleurs (1 ou 0)
 
 
@@ -10,6 +10,9 @@ matrice de taille nb_couleurs*nb_sommets pour les couleurs (1 ou 0)
 // ses freres avec une couleur sommet.couleur+1
 // rappeller la fonction sur chaque sommet
 
+
+fonction qui retourne les c pos x y et e x y
+fonction qui retourne les couleurs comme dans l'exemple donné dans le pdf
 
 
 https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/chapitre3.html
