@@ -69,21 +69,17 @@ int main(int argc, char *argv[]) {
 
 	/* CODE */
 
-ajouter_couleur(4, 1); // sommet d'indice 4 (sommet 5) : couleur 1
-ajouter_couleur(1, 2); // indice 1 (sommet 2) : 2
-ajouter_couleur(1, 3); // double conflit pour l'indice 1 : -2
-ajouter_couleur(1, 4); // triple conflit pour l'indice 1 : -2
-// -1 pour les autres sommets, car sans couleur
-
 	afficher_matrice_aretes(20);
+	// format_standard_matrice_aretes();
+	
+	printf("\n\n########################################\n");
+	printf("# COLORIAGE DE OUF TROP BIEN LOLPASTESTTRUCBOBMDR");
+	printf("\n########################################\n");
+
+	meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
+
 	afficher_matrice_couleurs(20);
-
-	format_standard_matrice_aretes();
 	format_standard_matrice_couleurs();
-
-	// appeler l'algo de coloriage ici
-
-	// afficher encore les trucs
 
 	liberer_matrices();
 

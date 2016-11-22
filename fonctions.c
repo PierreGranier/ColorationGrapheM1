@@ -37,9 +37,10 @@ void liberer_matrices() {
 
 
 void afficher_matrice_aretes(int pourcentage_visible) {
-	printf("\n\n########################################\n");
-	printf("# MATRICE ARETES\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%\n########################################\n\n", NOMBRE_DE_SOMMETS, NOMBRE_DE_SOMMETS, pourcentage_visible);
-	
+	printf("\n\n########################################");
+	printf("\n# MATRICE ARETES\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_SOMMETS, NOMBRE_DE_SOMMETS, pourcentage_visible);
+	printf("\n########################################\n\n");
+
 	for (int i = 0; i < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++j)
 		// for (int j = 0; j <= i; ++j)
@@ -50,9 +51,10 @@ void afficher_matrice_aretes(int pourcentage_visible) {
 }
 
 void afficher_matrice_couleurs(int pourcentage_visible) {
-	printf("\n\n########################################\n");
-	printf("# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%\n########################################\n\n", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, pourcentage_visible);
-	
+	printf("\n\n########################################");
+	printf("\n# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, pourcentage_visible);
+	printf("\n########################################\n\n");
+
 	for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++j) {
 			printf("%c ", MATRICE_COULEURS[i][j]);
@@ -93,6 +95,7 @@ void ajouter_arete(int indice1, int indice2) {
 }
 
 void ajouter_couleur(int indice_sommet, int indice_couleur) {
+
 	// Pour chaque couleur à ajouter il faut ajouter un tableau à une dimension dans la matrice des couleurs
 	// Il faut donc réallouer l'espace pour la matrice en prenant soin de sauvegarder les données de cette dernière et des les recopier une fois l'allocation faite
 
@@ -131,8 +134,28 @@ void ajouter_couleur(int indice_sommet, int indice_couleur) {
 		}
 		free(couleurs_sauvegarde);
 	}
-
+	
 	MATRICE_COULEURS[indice_couleur][indice_sommet] = '1';
+	
+}
+
+void ecraser_couleur(int indice_sommet, int indice_couleur) {
+	// Enlever les autres couleurs assignées au sommet et lui ajouter la couleur demandée
+	for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
+		MATRICE_COULEURS[i][indice_sommet] = '0';
+	}
+	
+	ajouter_couleur(indice_sommet, indice_couleur);
+}
+
+
+char couleur_du_sommet(int indice_sommet) {
+	for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
+		if (MATRICE_COULEURS[i][indice_sommet] == '1') {
+			return i;
+		}
+	}
+	return '-';
 }
 
 
@@ -168,10 +191,42 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 		Si y'a, on change la couleur et on passe au sommet suivant et on change la variable de changement
 		Si y'en a pas on passe au suivant.
 */
+	// Au début, on associe une première couleur au premier sommet
+	ajouter_couleur(0, 0); // indice_sommet, indice_couleur
+	for (int i = 1; i < NOMBRE_DE_SOMMETS; ++i) {
+		ajouter_couleur(i, 1);
+	}
+	
+	// Ensuite, on attribu une nouvelle couleur à chaque sommet qui entre en conflit avec son voisin
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
+			// Conflit = même couleur pour deux sommets voisins
+			// Checker la couleur de chaque sommet si ce sommet est un voisin du sommet
+			if (MATRICE_ARETES[i][j] == '1' && couleur_du_sommet(i) == couleur_du_sommet(j)) { // s'il le sommet a un frère et qu'ils ont la même couleur : conflit
+				// Changer la couleur de i en fonction de ses voisins
+				// Parcourir les voisins, mettre la première couleur disponible
+				// OU
+				// Changer la couleur de i en fonction du nombre de couleurs déjà utilisées
+				// Attribuer une nouvelle couleur au sommet
+				ecraser_couleur(i, NOMBRE_DE_COULEURS);
+			}
+		}
+	}
+
+	// Enfin, on reparcourt le graphe et on l'améliore en changeant les couleurs si possible : on prend une couleur déjà utilisée
+	//int verifier = 1;
+	//while (verifier == 1) {
+		for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // pour chaque sommet
+			ecraser_couleur(i, 0); // changement de sa couleur pour la plus petite
+			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // parcours des autres sommets
+				if (MATRICE_ARETES[i][j] == '1' && couleur_du_sommet(i) == couleur_du_sommet(j)) { // s'il y a un conflit de couleur entre le sommets et un frère à lui
+					ecraser_couleur(i, couleur_du_sommet(i)+1); // attribution d'une autre couleur
+				}
+			}
+		}
+	//}
 }
 
 void tibo() {
 	
 }
-
-// quand on coloriera, il faudra re-allouer de la mémoire pour chaque nouvelle COULEURS

@@ -13,6 +13,12 @@ launch: main.out test.txt
 	@echo "# Execution de $^"
 	./$^
 	
+	
+launch-time: main.out test.txt
+	@echo "# Execution de $^"
+	time ./$^
+	
+	
 clean:
 	rm *.out
 	
