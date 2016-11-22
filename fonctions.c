@@ -136,8 +136,38 @@ void ajouter_couleur(int indice_sommet, int indice_couleur) {
 }
 
 
-void bob() {
+void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
+	//Bon, j'avais fait plein de trucs mais comme j'ai toujours pas compris les nouvelles variables je vais tenter de faire du pseudo-code :)
+/*
+	Parcours_graphe()
+		si sommet[i] = debut 
+		alors sommet[i].couleur = 1
+		sinon sommet[i].couleur = couleur+1
 
+		parcourir_graphe_erreur()			//on pourrait mettre une variable de changement. Lorsque un sommet change de couleur, la variable passe à vraie et on peut reboucler. Lorsque la variable est fausse, aucune couleur n'a été changée donc on peut s'arrêter
+			int indice = chercher() 		//parcourt le graphe jusqu'à la première erreur. Donne l'indice du sommet et check si une meilleure coloration existe
+				sommet[indice].couleur = sommet[i].couleur++
+		OU SINON 
+		parcourir_graphe_erreur()
+			int var_conflit = 1, var_meilleure_coul = 1
+			si var_conflit = 1 
+			alors int indice = chercher_conflit() //parcourt le graphe jusqu'à la première erreur. Donne l'indice du sommet et change sa couleur avec nb_couleur++
+				si indice != -1
+				alors sommet[indice].couleur = sommet[i].couleur++
+				sinon 				//pas d'erreur trouvée
+					var_conflit = 0
+			sinon int indice = chercher_meilleure_couleur() //parcourt le graphe pour voir si une meilleure coloration est possible
+				si indice != -1 
+				alors sommet[indice].couleur = sommet[i].couleur++
+				sinon 				//pas de meilleure coloration 
+					var_meilleure_col = 0
+
+		EDIT : En fait c'est nul parce que faut faire les deux fonctions en même temps. Donc une fonction qui check d'abord si y'a des conflits sur le sommet.
+		Si y'a, on change la couleur et on passe au sommet suivant et on change la variable de changement
+		Si y'en a pas, on regarde si y'a une meilleure coloration. 
+		Si y'a, on change la couleur et on passe au sommet suivant et on change la variable de changement
+		Si y'en a pas on passe au suivant.
+*/
 }
 
 void tibo() {

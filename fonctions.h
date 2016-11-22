@@ -31,6 +31,7 @@ void format_standard_matrice_couleurs();
  * Met à '1' le char (indice1, indice2) de la matrice des aretes
  * Met à '1' le char (indice_sommet, indice_couleur) de la matrice des couleurs
  */
+void meilleur_coloriage_de_ouf_lol_opti_tupeuxpastestmdr();
 void ajouter_arete(int indice1, int indice2);
 void ajouter_couleur(int indice_sommet, int indice_couleur);
 
