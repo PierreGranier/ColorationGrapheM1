@@ -3,7 +3,7 @@
 CFLAGS=-Wall
 OFLAGS=-O2
 
-STRUCTURE_COULEURS=matrice # matrice ou tableau
+STRUCTURE_COULEURS=matrice
 
 
 all: main.out
