@@ -27,3 +27,5 @@ char couleur_du_sommet(int indice_sommet);
 
 int est_bien_colorie();
 void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
+void tibo();
+void compter_couleurs();

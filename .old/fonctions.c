@@ -255,12 +255,11 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 				if (MATRICE_ARETES[i][j] == '1' && couleur_du_sommet(i) == couleur_du_sommet(j)) { // s'il y a un conflit de couleur entre le sommets et un frère à lui
 					associer_couleur(i, couleur_du_sommet(i)+1); // attribution d'une autre couleur
 					j = 0;
-					++compteur_changements;
 				}
 			}
 			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pour re-optimiser et vérifier les conflits
 				++compteur_changements;
-				verifier = 1;
+				variable_de_changement = 1;
 			}
 		}
 		++compteur_tours;
