@@ -19,7 +19,8 @@ int main(int argc, char *argv[]) {
 	} else {
 		nom_fichier = (char*)malloc(strlen(argv[1]) * sizeof(char*)); // redimensionnement du tableau de char
 		strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
-		printf("Lecture du fichier %s\n", nom_fichier);
+		printf("\n########################################");
+		printf("\n# Lecture du fichier %s", nom_fichier);
 	}
 
 	FILE* fichier;
@@ -43,7 +44,11 @@ int main(int argc, char *argv[]) {
 				}
 				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
 				NOMBRE_D_ARETES = atoi(nb_aretes);
-				initialiser_matrices();
+				printf("\n# Initialisation des tableaux d'arêtes et de couleurs : ");
+				initialiser_aretes();
+				initialiser_couleurs();
+				printf("OK");
+				printf("\n# Ajout des arêtes : ");
 			} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
 				char premier_sommet[TAILLE_MAX] = "";
 				char deuxieme_sommet[TAILLE_MAX] = "";
@@ -64,22 +69,29 @@ int main(int argc, char *argv[]) {
 		printf("Impossible d'ouvrir le fichier %s", nom_fichier);
 	}
 
+	printf("OK");
+
 	fclose(fichier);		// On ferme le fichier
 	free(nom_fichier);
 
+	printf("\n# Fin de la lecture du fichier");
+	printf("\n########################################\n");
+
 	/* CODE */
 
-	afficher_matrice_aretes(20);
+	afficher_matrice_aretes(0);
 	// format_standard_matrice_aretes();
 	
-	printf("\n\n########################################\n");
+	printf("\n########################################\n");
 	printf("# COLORIAGE DE OUF TROP BIEN LOLPASTESTTRUCBOBMDR");
 	printf("\n########################################\n");
 
 	meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 
-	afficher_matrice_couleurs(20);
+	afficher_matrice_couleurs(10);
 	format_standard_matrice_couleurs();
+
+	printf("\nLe graphe est bien colorié : %d\n\n", est_bien_colorie());
 
 	liberer_matrices();
 

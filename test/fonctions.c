@@ -1,32 +1,5 @@
 #include "fonctions.h"
 
-
-int NOMBRE_DE_COULEURS = 0;
-
-
-void initialiser_aretes() {
-	// dimensionne le tableau à deux dimensions
-
-	MATRICE_ARETES = (char**)malloc(NOMBRE_DE_SOMMETS * sizeof(char*)); // NxN
-	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // dimensionne chaque ligne
-		MATRICE_ARETES[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char));
-	}
-	
-	// remplit la matrice de '0'
-
-	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
-			MATRICE_ARETES[i][j] = '0';
-		}
-	}
-}
-
-void initialiser_couleurs() {
-	// dimensionne le tableau à deux dimensions
-
-	MATRICE_COULEURS = (char**)malloc(0 * sizeof(char*)); // 0xN
-}
-
 void ajouter_couleur(int indice_couleur) {
 
 	// Pour chaque couleur à ajouter il faut ajouter un tableau à une dimension dans la matrice des couleurs

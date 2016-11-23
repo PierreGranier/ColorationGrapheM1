@@ -1,21 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-// VARIABLES GLOBALES
-
-int NOMBRE_DE_SOMMETS, NOMBRE_D_ARETES, NOMBRE_DE_COULEURS;
-char **MATRICE_ARETES, **MATRICE_COULEURS; // matrices avec des char 1 ou 0, 0 par défaut
+#include "aretes_matrice.h"
+#include "couleurs_matrice.h"
 
 // FONCTIONS
 
 /*
- * Alloue la mémoire suffisante pour la matrice et la remplie de '0'
- * Alloue la mémoire suffisante pour la matrice et la remplie de '0'
  * Redimensionne la taille de la matrice des couleurs
  * Libère la mémoire occupée par les matrices
  */
-void initialiser_aretes();
-void initialiser_couleurs();
 void ajouter_couleur(int indice_couleur);
 void liberer_matrices();
 

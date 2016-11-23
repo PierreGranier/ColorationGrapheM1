@@ -1,8 +1,23 @@
 
-
-matrice de taille nb_sommets*nb_sommets pour les aretes (1 ou 0)
-matrice de taille nb_couleurs*nb_sommets pour les couleurs (1 ou 0)
-
+// en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
+clique :
+max_clique = 0;
+pour chaque sommet i de ARETES
+	tableau[1] bros
+	bros.ajoutez(i)
+	pour chaque sommet j de ARETES
+		// s'il y a une arête entre j et tous les sommets du tableau, ce sommet fait partie de la clique
+		int ajouter = 1
+		k = 0
+		tq k < bros.taille et ajouter = 1
+			si j != k et ARETES[j][k] = '0'
+				ajouter = 0
+		si ajouter = 1
+			bros.ajouter(k)
+	fin pour
+	si bros.taille > max_clique
+		max_clique = bros.taille
+fin pour
 
 // technique de coloriage :
 // commencer par le sommet qui a le plus de freres
