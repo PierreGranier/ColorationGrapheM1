@@ -29,7 +29,7 @@ void initialiser_couleurs() {
 }
 
 /*
- * Libère la mémoire occupée par les matrices
+ * Libère la mémoire occupée par la matrice
  */
 void liberer_couleurs() {
 	for (int i = 0; i < blocs_alloues*TAILLE_BLOC; ++i) {
@@ -41,49 +41,69 @@ void liberer_couleurs() {
 /*
  * Redimensionne la taille de la matrice des couleurs en rajoutant un bloc de lignes
  */
-void ajouter_couleurs() {
+void ajouter_couleur() {
 	// Lorsque le nombre de couleurs proposé par la matrice n'est pas suffisant il faut ajouter des tableaux à une dimension dans la matrice des couleurs
 	// Il faut donc réallouer l'espace pour la matrice en prenant soin de sauvegarder les données de cette dernière et des les recopier une fois l'allocation faite
 
-	char** couleurs_sauvegarde = (char**)malloc(blocs_alloues*TAILLE_BLOC * sizeof(char*));
+	++NOMBRE_DE_COULEURS;
+	// Si la matrice des couleurs ne donne pas assez de places il faut l'agrandir
+	if (NOMBRE_DE_COULEURS > blocs_alloues*TAILLE_BLOC) {
+		char** couleurs_sauvegarde = (char**)malloc(blocs_alloues*TAILLE_BLOC * sizeof(char*));
 
-	// Copie des données de la matrice des couleurs vers la sauvegarde (allouer l'espace de chaque ligne), ligne par ligne et case par case
-	for (int i = 0; i < blocs_alloues*TAILLE_BLOC; ++i) { // dimensionne chaque ligne
-		couleurs_sauvegarde[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char));
-		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // copie de chaque élément de la matrice dans cette ligne
-			couleurs_sauvegarde[i][j] = MATRICE_COULEURS[i][j];
+		// Copie des données de la matrice des couleurs vers la sauvegarde (allouer l'espace de chaque ligne), ligne par ligne et case par case
+		for (int i = 0; i < blocs_alloues*TAILLE_BLOC; ++i) { // dimensionne chaque ligne
+			couleurs_sauvegarde[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char));
+			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // copie de chaque élément de la matrice dans cette ligne
+				couleurs_sauvegarde[i][j] = MATRICE_COULEURS[i][j];
+			}
+		}
+
+		// Redimensionnement de la nouvelle matrice des couleurs
+		++blocs_alloues;
+		MATRICE_COULEURS = (char**)malloc(blocs_alloues*TAILLE_BLOC * sizeof(char*)); // redimensionne la matrice (ré-allocation mémoire)
+
+		// Copie des données de la sauvegarde vers la nouvelle matrice (allouer l'espace de chaque ligne) et mise à '0' des éléments des nouvelles lignes
+		for (int i = 0; i < (blocs_alloues-1)*TAILLE_BLOC; ++i) {
+			MATRICE_COULEURS[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionne la ligne
+			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // copie de chaque élément de la sauvegarde pour cette ligne
+				MATRICE_COULEURS[i][j] = couleurs_sauvegarde[i][j];
+			}
+		}
+		for (int i = (blocs_alloues-1)*TAILLE_BLOC; i < blocs_alloues*TAILLE_BLOC; ++i) {
+			MATRICE_COULEURS[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionne la ligne
+			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // mise à '0' de la nouvelle ligne
+				MATRICE_COULEURS[i][j] = '0';
+			}
+		}
+
+		// Liberation de la mémoire de la matrice de sauvegarde
+		for (int i = 0; i < (blocs_alloues-1)*TAILLE_BLOC; ++i) { // libère la mémoire dela sauvegarde
+			free(couleurs_sauvegarde[i]);
+		}
+		free(couleurs_sauvegarde);
+	}
+
+	/*
+	* Affiche les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
+	*/
+	void afficher_matrice_couleurs(int pourcentage_visible) {
+		printf("\n########################################");
+		printf("\n# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, pourcentage_visible);
+		printf("\n########################################\n\n");
+
+		for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
+			for (int j = 0; j < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++j) {
+				printf("%c ", MATRICE_COULEURS[i][j]);
+			}
+			printf("\n");
 		}
 	}
-
-	// Redimensionnement de la nouvelle matrice des couleurs
-    ++blocs_alloues;
-	MATRICE_COULEURS = (char**)malloc(blocs_alloues*TAILLE_BLOC * sizeof(char*)); // redimensionne la matrice (ré-allocation mémoire)
-
-	// Copie des données de la sauvegarde vers la nouvelle matrice (allouer l'espace de chaque ligne) et mise à '0' des éléments des nouvelles lignes
-	for (int i = 0; i < (blocs_alloues-1)*TAILLE_BLOC; ++i) {
-		MATRICE_COULEURS[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionne la ligne
-		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // copie de chaque élément de la sauvegarde pour cette ligne
-			MATRICE_COULEURS[i][j] = couleurs_sauvegarde[i][j];
-		}
-	}
-	for (int i = (blocs_alloues-1)*TAILLE_BLOC; i < blocs_alloues*TAILLE_BLOC; ++i) {
-		MATRICE_COULEURS[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionne la ligne
-		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // mise à '0' de la nouvelle ligne
-			MATRICE_COULEURS[i][j] = '0';
-		}
-	}
-
-	// Liberation de la mémoire de la matrice de sauvegarde
-	for (int i = 0; i < (blocs_alloues-1)*TAILLE_BLOC; ++i) { // libère la mémoire dela sauvegarde
-		free(couleurs_sauvegarde[i]);
-	}
-	free(couleurs_sauvegarde);
 }
 
 /*
- * Affiche les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
+ * Affiche la matrice, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
  */
-void afficher_matrice_couleurs(int pourcentage_visible) {
+void afficher_couleurs(int pourcentage_visible) {
 	printf("\n########################################");
 	printf("\n# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, pourcentage_visible);
 	printf("\n########################################\n\n");
@@ -97,9 +117,9 @@ void afficher_matrice_couleurs(int pourcentage_visible) {
 }
 
 /*
- * Retourne une chaine de charactères de la matrice des arêtes et des couleurs au format standard
+ * Retourne une chaine de charactères de la matrice des couleurs au format standard
  */
-void format_standard_matrice_couleurs() {
+void format_standard_couleurs() {
 	printf("\nK=%d\n", NOMBRE_DE_COULEURS);
 	for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 		int couleur = -1; // -1 = pas de couleur assignée
@@ -119,11 +139,7 @@ void format_standard_matrice_couleurs() {
 void associer_couleur(int indice_sommet, int indice_couleur) {
 	// Si la couleur n'a pas encore été utilisée, il faut incrémenter le compteur de couleurs jusqu'à atteindre l'indice demandé
 	while (indice_couleur >= NOMBRE_DE_COULEURS) {
-		++NOMBRE_DE_COULEURS;
-		// Si la matrice des couleurs ne donne pas assez de places il faut l'agrandir
-		if (NOMBRE_DE_COULEURS > blocs_alloues*TAILLE_BLOC) {
-			ajouter_couleurs();
-		}
+		ajouter_couleur();
 	}
 	
 	// Enlever les autres couleurs assignées au sommet et lui ajouter la couleur demandée

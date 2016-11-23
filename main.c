@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 
 	/* CODE */
 
-	afficher_matrice_aretes(0);
+	afficher_aretes(0);
 	// format_standard_matrice_aretes();
 	
 	printf("\n########################################\n");
@@ -88,8 +88,8 @@ int main(int argc, char *argv[]) {
 
 	meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 
-	afficher_matrice_couleurs(10);
-	format_standard_matrice_couleurs();
+	afficher_couleurs(10);
+	format_standard_couleurs();
 
 	printf("\nLe graphe est bien colorié : %d\n\n", est_bien_colorie());
 

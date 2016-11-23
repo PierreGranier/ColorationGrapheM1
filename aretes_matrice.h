@@ -25,7 +25,7 @@ void initialiser_aretes() {
 }
 
 /*
- * Libère la mémoire occupée par les matrices
+ * Libère la mémoire occupée par la matrice
  */
 void liberer_aretes() {
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
@@ -35,9 +35,9 @@ void liberer_aretes() {
 }
 
 /*
- * Affiche les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
+ * Affiche la matrice, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
  */
-void afficher_matrice_aretes(int pourcentage_visible) {
+void afficher_aretes(int pourcentage_visible) {
 	printf("\n\n########################################");
 	printf("\n# MATRICE ARETES\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_SOMMETS, NOMBRE_DE_SOMMETS, pourcentage_visible);
 	printf("\n########################################\n\n");
@@ -51,9 +51,9 @@ void afficher_matrice_aretes(int pourcentage_visible) {
 }
 
 /*
- * Retourne une chaine de charactères de la matrice des arêtes et des couleurs au format standard
+ * Retourne une chaine de charactères de la matrice des arêtes au format standard
  */
-void format_standard_matrice_aretes() {
+void format_standard_aretes() {
 	printf("\np col %d %d\n", NOMBRE_DE_SOMMETS, NOMBRE_D_ARETES);
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j <= i; ++j) {
