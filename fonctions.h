@@ -25,7 +25,7 @@ char couleur_du_sommet(int indice_sommet);
 // FONCTIONS POUR LE COLORIAGE
 // implémentées dans fonctions.c
 
+int compter_couleurs();
 int est_bien_colorie();
 void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 void tibo();
-int compter_couleurs();

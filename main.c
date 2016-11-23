@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 		char ligne[TAILLE_MAX] = "";
 
 		while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
-			puts(ligne);
+			// puts(ligne);
 			if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
 				char nb_sommets[TAILLE_MAX] = "";
 				char nb_aretes[TAILLE_MAX] = "";
@@ -86,15 +86,19 @@ int main(int argc, char *argv[]) {
 	printf("\n########################################\n");
 
 	meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
-
+	
+	printf("\nNombre de couleurs utilisées : %d\n", compter_couleurs());
+	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
 	// afficher_couleurs(10);
+
+	printf("\n########################################\n");
+	printf("# RECAP POUR LE COMPTE RENDU");
+	printf("\n########################################\n");
+
 	format_standard_couleurs();
-	printf("Nombre de couleurs utilisées : %d\n\n", compter_couleurs());
 
-	printf("\nLe graphe est bien colorié : %d\n\n", est_bien_colorie());
-
-	// liberer_aretes();
-	// liberer_couleurs();
+	liberer_aretes();
+	liberer_couleurs();
 
 	return EXIT_SUCCESS;
 }

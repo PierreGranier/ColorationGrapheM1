@@ -1,5 +1,16 @@
 #include "fonctions.h"
 
+int compter_couleurs() {
+	int i=0, nb_coul = 1, j=0;
+	for(i=0; i<NOMBRE_D_ARETES; ++i) {
+		if(couleur_du_sommet(i) > j) {
+			nb_coul++;
+			j++;
+		}
+	}
+	return nb_coul;
+}
+
 int est_bien_colorie() {
 	// Pour chaque sommet i
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
@@ -74,7 +85,7 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 	// Sans le code ci-dessus, on ne donne pas des couleurs à la volée, mais on fait un changement de couleur supplémentaire
 	// Le coloriage semble être le même
 
-	afficher_couleurs(20);
+	// afficher_couleurs(20);
 	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
 	//Ok donc maintenant on est sûr que y'a pas de conflits après cette fonction de coloration
 
@@ -98,7 +109,9 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 				variable_de_changement = 1;
 			}
 		}
+		NOMBRE_DE_COULEURS = compter_couleurs();
 		++compteur_tours;
+
 		printf("\n================ tour %d ================\n", compteur_tours);
 		printf("%d changements de couleur", compteur_changements);
 		printf("\nest bien colorie = %d\n", est_bien_colorie());
@@ -107,17 +120,6 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 
 	printf("\n================ fin ================\n%d tours\n", compteur_tours);
 	printf("%d changements de couleur\n", compteur_changements);
-}
-
-int compter_couleurs() {
-	int i=0, nb_coul = 1, j=0;
-	for(i=0; i<NOMBRE_D_ARETES; ++i) {
-		if(couleur_du_sommet(i) > j) {
-			nb_coul++;
-			j++;
-		}
-	}
-return nb_coul;
 }
 
 void tibo() {
