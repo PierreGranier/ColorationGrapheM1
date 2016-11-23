@@ -262,9 +262,6 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			}
 		}
 		++compteur_tours;
-		printf("\n================ tour %d ================\n", compteur_tours);
-		printf("%d changements de couleur", compteur_changements);
-		printf("\nest bien colorie = %d\n", est_bien_colorie());
 		format_standard_couleurs();
 		// la technique de la dernière chance
 		/*if (a == 1) {
@@ -277,19 +274,9 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			}
 		}*/
 	}
-<<<<<<< HEAD:.old/fonctions.c
-	printf("\n================ fin ================\n%d tours\n", compteur_tours);
-=======
 	
 	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
 
 	printf("%d tours\n", compteur_tours);
->>>>>>> 5b6dce4b396cf9113e73712822c13710d15f4ed2:fonctions.c
 	printf("%d changements de couleur\n", compteur_changements);
-}
-
-void tibo() {
-	// compter les sommets avec la couleur k => possible avec matrice et tableau
-	// connaitre la couleur d'un sommet => plus rapide avec un tableau : O(1) contre O(N) : constant contre linéaire
-
 }

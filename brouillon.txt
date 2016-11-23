@@ -1,3 +1,7 @@
+optimiser en cherchant la plus petite couleur dispo pour un sommet
+make launch xxx.txt
+affichage peut etre a la fin de chaque while
+faire mon algo
 
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
 clique :
