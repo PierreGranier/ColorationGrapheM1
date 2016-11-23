@@ -1,10 +1,11 @@
+#include "../fonctions.h"
 
 #define TAILLE_BLOC 10 // nombre de lignes allouées dynamiquement
 
 // VARIABLES GLOBALES
 
 int NOMBRE_DE_COULEURS = 0;
-char **MATRICE_COULEURS; // matrice avec des char 1 ou 0, 0 par défaut
+char** MATRICE_COULEURS; // matrice avec des char 1 ou 0, 0 par défaut
 int blocs_alloues = 0;
 
 // FONCTIONS

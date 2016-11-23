@@ -1,6 +1,5 @@
 #include "fonctions.h"
 
-
 int NOMBRE_DE_COULEURS = 0;
 
 
@@ -234,6 +233,7 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			}
 		}
 	}
+	
 	afficher_couleurs(20);
 	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
 	//Ok donc maintenant on est sûr que y'a pas de conflits après cette fonction de coloration
@@ -258,11 +258,16 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 					++compteur_changements;
 				}
 			}
-			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pourre-optimiser et vérifier les conflits
-				variable_de_changement = 1;
+			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pour re-optimiser et vérifier les conflits
+				++compteur_changements;
+				verifier = 1;
 			}
 		}
 		++compteur_tours;
+		printf("\n================ tour %d ================\n", compteur_tours);
+		printf("%d changements de couleur", compteur_changements);
+		printf("\nest bien colorie = %d\n", est_bien_colorie());
+		format_standard_couleurs();
 		// la technique de la dernière chance
 		/*if (a == 1) {
 			a = 0;
@@ -274,10 +279,8 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			}
 		}*/
 	}
-	
-	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
+	printf("\n================ fin ================\n%d tours\n", compteur_tours);
 
-	printf("%d tours\n", compteur_tours);
 	printf("%d changements de couleur\n", compteur_changements);
 }
 

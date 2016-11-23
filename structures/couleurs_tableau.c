@@ -1,3 +1,4 @@
+#include "../fonctions.h"
 
 // VARIABLES GLOBALES
 
