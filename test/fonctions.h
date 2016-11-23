@@ -5,11 +5,6 @@
 #include "structures/couleurs_matrice.h"
 // #include "structures/couleurs_tableau.h"
 
-// VARIABLES GLOBALES
-
-int NOMBRE_DE_COULEURS = 0;
-int NOMBRE_DE_SOMMETS = 0, NOMBRE_D_ARETES = 0;
-
 // FONCTIONS
 
 /*
