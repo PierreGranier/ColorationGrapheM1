@@ -45,6 +45,11 @@ void associer_couleur(int indice_sommet, int indice_couleur);
 char couleur_du_sommet(int indice_sommet);
 
 /*
+ * Retourne le nombre de couleur du graphe
+ */
+ int compter_couleur();
+
+/*
  * Vérifie que le graphe est bien colorié, c'est-à-dire qu'il ne contient pas de conflit
  * Un conflit intervient lorsque deux sommets adjascents/frères/liés sont de la même couleur
  * La fonction retourne 1 quand le graphe est correct, 0 sinon

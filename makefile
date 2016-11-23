@@ -24,7 +24,7 @@ launch_test: test.out test.txt
 	@echo "# Execution de $^"
 	./$^
 
-launch-time: main.out test.txt
+launch-time: main.out test2.txt
 	@echo "# Execution de $^"
 	time ./$^
 	
