@@ -89,6 +89,7 @@ int main(int argc, char *argv[]) {
 
 	// afficher_couleurs(10);
 	format_standard_couleurs();
+	printf("Nombre de couleurs utilisées : %d\n\n", compter_couleurs());
 
 	printf("\nLe graphe est bien colorié : %d\n\n", est_bien_colorie());
 

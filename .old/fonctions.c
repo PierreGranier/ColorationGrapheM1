@@ -121,7 +121,7 @@ void format_standard_aretes() {
 }
 
 void format_standard_couleurs() {
-	printf("\nK=%d\n", NOMBRE_DE_COULEURS);
+	//printf("\nK=%d\n", NOMBRE_DE_COULEURS);
 	for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 		int couleur = -1; // -1 = pas de couleur assignée
 		for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
@@ -254,6 +254,8 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // parcours des autres sommets
 				if (MATRICE_ARETES[i][j] == '1' && couleur_du_sommet(i) == couleur_du_sommet(j)) { // s'il y a un conflit de couleur entre le sommets et un frère à lui
 					associer_couleur(i, couleur_du_sommet(i)+1); // attribution d'une autre couleur
+					j = 0;
+					++compteur_changements;
 				}
 			}
 			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pour re-optimiser et vérifier les conflits
@@ -274,9 +276,27 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			}
 		}*/
 	}
-	
+
 	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
 
+	printf("\n================ fin ================\n%d tours\n", compteur_tours);
 	printf("%d tours\n", compteur_tours);
 	printf("%d changements de couleur\n", compteur_changements);
+}
+
+int compter_couleurs() {
+	int i=0, nb_coul = 1, j=0;
+	for(i=0; i<NOMBRE_D_ARETES; ++i) {
+		if(couleur_du_sommet(i) > j) {
+			nb_coul++;
+			j++;
+		}
+	}
+return nb_coul;
+}
+
+void tibo() {
+	// compter les sommets avec la couleur k => possible avec matrice et tableau
+	// connaitre la couleur d'un sommet => plus rapide avec un tableau : O(1) contre O(N) : constant contre linéaire
+
 }
