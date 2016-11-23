@@ -1,8 +1,9 @@
+#include "../fonctions.h"
 
 // VARIABLES GLOBALES
 
 int NOMBRE_DE_SOMMETS = 0, NOMBRE_D_ARETES = 0;
-char **MATRICE_ARETES; // matrice avec des char 1 ou 0, 0 par défaut
+char** MATRICE_ARETES; // matrice avec des char 1 ou 0, 0 par défaut
 
 // FONCTIONS
 

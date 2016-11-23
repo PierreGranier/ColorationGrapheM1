@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
 
 	meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 
-	afficher_couleurs(10);
+	// afficher_couleurs(10);
 	format_standard_couleurs();
 
 	printf("\nLe graphe est bien colorié : %d\n\n", est_bien_colorie());

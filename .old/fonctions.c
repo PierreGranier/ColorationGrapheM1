@@ -1,6 +1,5 @@
 #include "fonctions.h"
 
-
 int NOMBRE_DE_COULEURS = 0;
 
 
@@ -220,7 +219,7 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 	}
 	
 	// Ensuite, on attribue une nouvelle couleur à chaque sommet qui entre en conflit avec son voisin
-	/*for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 			// Conflit = même couleur pour deux sommets voisins
 			// Checker la couleur de chaque sommet si ce sommet est un voisin du sommet
@@ -233,7 +232,7 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 				associer_couleur(i, NOMBRE_DE_COULEURS);
 			}
 		}
-	}*/
+	}
 	// Sans le code ci-dessus, on ne donne pas des couleurs à la volée, mais on fait un changement de couleur supplémentaire
 	// Le coloriage semble être le même
 
@@ -250,14 +249,18 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // parcours des autres sommets
 				if (MATRICE_ARETES[i][j] == '1' && couleur_du_sommet(i) == couleur_du_sommet(j)) { // s'il y a un conflit de couleur entre le sommets et un frère à lui
 					associer_couleur(i, couleur_du_sommet(i)+1); // attribution d'une autre couleur
-					++compteur_changements;
 				}
 			}
-			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pourre-optimiser et vérifier les conflits
+			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pour re-optimiser et vérifier les conflits
+				++compteur_changements;
 				verifier = 1;
 			}
 		}
 		++compteur_tours;
+		printf("\n================ tour %d ================\n", compteur_tours);
+		printf("%d changements de couleur", compteur_changements);
+		printf("\nest bien colorie = %d\n", est_bien_colorie());
+		format_standard_couleurs();
 		// la technique de la dernière chance
 		/*if (a == 1) {
 			a = 0;
@@ -269,7 +272,7 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			}
 		}*/
 	}
-	printf("%d tours\n", compteur_tours);
+	printf("\n================ fin ================\n%d tours\n", compteur_tours);
 	printf("%d changements de couleur\n", compteur_changements);
 }
 
