@@ -93,7 +93,8 @@ int main(int argc, char *argv[]) {
 
 	printf("\nLe graphe est bien colorié : %d\n\n", est_bien_colorie());
 
-	liberer_matrices();
+	liberer_aretes();
+	liberer_couleurs();
 
 	return EXIT_SUCCESS;
 }

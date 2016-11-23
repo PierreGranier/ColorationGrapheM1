@@ -26,5 +26,11 @@ fin pour
 // rappeller la fonction sur chaque sommet
 
 
+// COMPARAISON ENTRE MATRICE OU TABLEAU POUR LES COULEURS
+// compter les sommets avec la couleur k => possible avec matrice et tableau
+// connaitre la couleur d'un sommet => plus rapide avec un tableau : O(1) contre O(N) : constant contre linéaire
+
+
+
 https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/chapitre3.html
 https://openclassrooms.com/courses/apprenez-a-programmer-en-c/les-chaines-de-caracteres

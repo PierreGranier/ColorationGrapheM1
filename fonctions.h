@@ -16,8 +16,9 @@ char **MATRICE_ARETES, **MATRICE_COULEURS; // matrices avec des char 1 ou 0, 0 p
  */
 void initialiser_aretes();
 void initialiser_couleurs();
-void ajouter_couleur(int indice_couleur);
-void liberer_matrices();
+void ajouter_couleurs(int indice_couleur);
+void liberer_aretes();
+void liberer_couleurs();
 
 /*
  * Affiche les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon

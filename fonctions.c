@@ -27,7 +27,7 @@ void initialiser_couleurs() {
 	MATRICE_COULEURS = (char**)malloc(0 * sizeof(char*)); // 0xN
 }
 
-void ajouter_couleur(int indice_couleur) {
+void ajouter_couleurs(int indice_couleur) {
 
 	// Pour chaque couleur à ajouter il faut ajouter un tableau à une dimension dans la matrice des couleurs
 	// Il faut donc réallouer l'espace pour la matrice en prenant soin de sauvegarder les données de cette dernière et des les recopier une fois l'allocation faite
@@ -37,7 +37,7 @@ void ajouter_couleur(int indice_couleur) {
 
 		// Copie des données de la matrice des couleurs vers la sauvegarde (allouer l'espace de chaque ligne), ligne par ligne et case par case
 		for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
-			couleurs_sauvegarde[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionnne la ligne
+			couleurs_sauvegarde[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionne la ligne
 			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // copie de chaque élément de la matrice pour cette ligne
 				couleurs_sauvegarde[i][j] = MATRICE_COULEURS[i][j];
 			}
@@ -49,7 +49,7 @@ void ajouter_couleur(int indice_couleur) {
 
 		// Copie des données de la sauvegarde vers la nouvelle matrice (allouer l'espace de chaque ligne) et mise à '0' des éléments de la nouvelle et dernière ligne
 		for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
-			MATRICE_COULEURS[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionne de la ligne
+			MATRICE_COULEURS[i] = (char*)malloc(NOMBRE_DE_SOMMETS * sizeof(char)); // dimensionne la ligne
 			if (i == NOMBRE_DE_COULEURS-1) {
 				for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // mise à '0' de la nouvelle ligne
 					MATRICE_COULEURS[i][j] = '0';
@@ -69,16 +69,18 @@ void ajouter_couleur(int indice_couleur) {
 	}
 }
 
-void liberer_matrices() {
+void liberer_aretes() {
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-		free(MATRICE_ARETES[i]); // pb quand nb de couleurs >= 4
+		free(MATRICE_ARETES[i]);
 	}
 	free(MATRICE_ARETES);
+}
 
+void liberer_couleurs() {
 	for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
 		free(MATRICE_COULEURS[i]);
 	}
-	free(MATRICE_COULEURS); // pb quand nb de couleurs >= 4
+	free(MATRICE_COULEURS);
 }
 
 
@@ -141,7 +143,7 @@ void ajouter_arete(int indice1, int indice2) {
 
 
 void associer_couleur(int indice_sommet, int indice_couleur) {
-	ajouter_couleur(indice_couleur);
+	ajouter_couleurs(indice_couleur);
 
 	// Enlever les autres couleurs assignées au sommet et lui ajouter la couleur demandée
 	for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
