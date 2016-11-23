@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 		char ligne[TAILLE_MAX] = "";
 
 		while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
-			//puts(ligne);
+			puts(ligne);
 			if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
 				char nb_sommets[TAILLE_MAX] = "";
 				char nb_aretes[TAILLE_MAX] = "";
