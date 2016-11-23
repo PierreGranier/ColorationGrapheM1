@@ -16,7 +16,7 @@ test.out: main.c test/fonctions.c
 	gcc -o test.out $^ $(CFLAGS) $(OFLAGS)
 
 
-launch: main.out test.txt
+launch: main.out test2.txt
 	@echo "# Execution de $^"
 	./$^
 	

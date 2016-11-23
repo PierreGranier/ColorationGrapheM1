@@ -220,7 +220,7 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 	}
 	
 	// Ensuite, on attribue une nouvelle couleur à chaque sommet qui entre en conflit avec son voisin
-	/*for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 			// Conflit = même couleur pour deux sommets voisins
 			// Checker la couleur de chaque sommet si ce sommet est un voisin du sommet
@@ -233,17 +233,21 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 				associer_couleur(i, NOMBRE_DE_COULEURS);
 			}
 		}
-	}*/
+	}
+	afficher_couleurs(20);
+	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
+	//Ok donc maintenant on est sûr que y'a pas de conflits après cette fonction de coloration
+
 	// Sans le code ci-dessus, on ne donne pas des couleurs à la volée, mais on fait un changement de couleur supplémentaire
 	// Le coloriage semble être le même
 
 	// Enfin, on reparcourt le graphe et on l'améliore en changeant les couleurs si possible : on prend une couleur déjà utilisée
-	int verifier = 1;
+	int variable_de_changement = 1;		//variable de changement. Check si une couleur a changé dans le dernier parcours
 	int compteur_tours = 0;
 	int compteur_changements = 0;
 	int a = 0;
-	while (verifier == 1 || a == 1) {
-		verifier = 0;
+	while (variable_de_changement == 1 || a == 1) {
+		variable_de_changement = 0;
 		for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) { // pour chaque sommet
 			int ancienne_couleur = couleur_du_sommet(i);
 			associer_couleur(i, 0); // changement de sa couleur pour la plus petite
@@ -254,7 +258,7 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 				}
 			}
 			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pourre-optimiser et vérifier les conflits
-				verifier = 1;
+				variable_de_changement = 1;
 			}
 		}
 		++compteur_tours;
@@ -262,13 +266,16 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 		/*if (a == 1) {
 			a = 0;
 		} else {
-			if (verifier == 1) {
+			if (variable_de_changement == 1) {
 				a = 0;
 			} else {
 				a = 1;
 			}
 		}*/
 	}
+	
+	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
+
 	printf("%d tours\n", compteur_tours);
 	printf("%d changements de couleur\n", compteur_changements);
 }
