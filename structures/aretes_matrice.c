@@ -36,6 +36,14 @@ void liberer_aretes() {
 }
 
 /*
+ * Met à '1' le char (indice1, indice2) de la matrice des aretes
+ */
+void ajouter_arete(int indice1, int indice2) {
+	MATRICE_ARETES[indice1][indice2] = '1';
+	MATRICE_ARETES[indice2][indice1] = '1';
+}
+
+/*
  * Affiche la matrice, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
  */
 void afficher_aretes(int pourcentage_visible) {
@@ -62,12 +70,4 @@ void format_standard_aretes() {
 		}
 	}
 	printf("\n");
-}
-
-/*
- * Met à '1' le char (indice1, indice2) de la matrice des aretes
- */
-void ajouter_arete(int indice1, int indice2) {
-	MATRICE_ARETES[indice1][indice2] = '1';
-	MATRICE_ARETES[indice2][indice1] = '1';
 }
