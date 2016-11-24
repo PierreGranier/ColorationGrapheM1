@@ -12,7 +12,7 @@ int* TABLEAU_COULEURS; // matrice avec des char -1 par défaut
  */
 void initialiser_couleurs() {
 	// Dimensionne un tableau à une dimension
-	TABLEAU_COULEURS = (int*)malloc(sizeof(int)); // 1xN
+	TABLEAU_COULEURS = (int*)malloc(NOMBRE_DE_SOMMETS * sizeof(int)); // 1xN
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
         TABLEAU_COULEURS[i] = -1;
 	}
@@ -52,7 +52,7 @@ void afficher_couleurs(int pourcentage_visible) {
 void format_standard_couleurs() {
 	printf("\nK=%d\n", NOMBRE_DE_COULEURS);
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-        printf("%i ", TABLEAU_COULEURS[i]);
+        printf(" %i ", TABLEAU_COULEURS[i]);
 	}
 	printf("\n");
 }
@@ -73,6 +73,6 @@ void associer_couleur(int indice_sommet, int indice_couleur) {
 /*
  * Retourne la couleur du sommet
  */
-char couleur_du_sommet(int indice_sommet) {
+int couleur_du_sommet(int indice_sommet) {
     return TABLEAU_COULEURS[indice_sommet];
 }

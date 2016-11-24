@@ -4,7 +4,7 @@
 
 #include "fonctions.h"
 
-#define TAILLE_MAX 50
+#define TAILLE_MAX 90
 
 int main(int argc, char *argv[]) {
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 		char ligne[TAILLE_MAX] = "";
 
 		while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
-			// puts(ligne);
+			puts(ligne);
 			if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
 				char nb_sommets[TAILLE_MAX] = "";
 				char nb_aretes[TAILLE_MAX] = "";
@@ -59,6 +59,7 @@ int main(int argc, char *argv[]) {
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					deuxieme_sommet[i-j] = ligne[i];
 				}
+				printf("tentative d'ajout de l'arête à indices (%d, %d)\n", atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);
 				ajouter_arete(atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);		// le -1 sert parce que le tableau commence à 0 contrairement au num du sommet 
 			}
 		}
@@ -78,7 +79,8 @@ int main(int argc, char *argv[]) {
 
 	/* CODE */
 
-	afficher_aretes(0);
+	// afficher_aretes(10);
+	// afficher_couleurs(10);
 	// format_standard_matrice_aretes();
 	
 	printf("\n########################################\n");
@@ -89,12 +91,13 @@ int main(int argc, char *argv[]) {
 	
 	printf("\nNombre de couleurs utilisées : %d\n", compter_couleurs());
 	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
-	// afficher_couleurs(10);
+	printf("Taille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
 
 	printf("\n########################################\n");
 	printf("# RECAP POUR LE COMPTE RENDU");
 	printf("\n########################################\n");
 
+	// afficher_couleurs(10);
 	format_standard_couleurs();
 
 	liberer_aretes();
