@@ -26,7 +26,10 @@ int couleur_du_sommet(int indice_sommet);
 // implémentées dans fonctions.c
 
 int compter_couleurs();
+int chercher_premiere_couleur(int indice_sommet);
 int est_bien_colorie();
 int clique_maximum();
 void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 void tibo();
+
+

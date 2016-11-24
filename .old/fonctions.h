@@ -50,6 +50,12 @@ char couleur_du_sommet(int indice_sommet);
  int compter_couleur();
 
 /*
+ * Retourne la premiere couleur minimale dispo dans le voisinage du sommet indice_sommet
+ */
+ int chercher_premiere_couleur(int indice_sommet);
+
+
+/*
  * Vérifie que le graphe est bien colorié, c'est-à-dire qu'il ne contient pas de conflit
  * Un conflit intervient lorsque deux sommets adjascents/frères/liés sont de la même couleur
  * La fonction retourne 1 quand le graphe est correct, 0 sinon
