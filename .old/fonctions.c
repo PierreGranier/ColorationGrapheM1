@@ -253,8 +253,8 @@ void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr() {
 			associer_couleur(i, 0); // changement de sa couleur pour la plus petite
 			for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) { // parcours des autres sommets
 				if (MATRICE_ARETES[i][j] == '1' && couleur_du_sommet(i) == couleur_du_sommet(j)) { // s'il y a un conflit de couleur entre le sommets et un frère à lui
-					associer_couleur(i, couleur_du_sommet(i)+1); // attribution d'une autre couleur
-					j = 0;
+					associer_couleur(i, chercher_premiere_couleur(i)); // attribution d'une autre couleur
+					//j = 0;
 				}
 			}
 			if (couleur_du_sommet(i) != ancienne_couleur) { // s'il y a eu un changement de couleur, il faudra re-parcourir le graphe pour re-optimiser et vérifier les conflits
@@ -292,6 +292,17 @@ int compter_couleurs() {
 		}
 	}
 return nb_coul;
+}
+
+int chercher_premiere_couleur(int indice_sommet) {
+	int i, couleur_min = 0;
+	for(i = 0; i<NOMBRE_DE_SOMMETS; ++i) {
+		if(MATRICE_ARETES[indice_sommet][i] == '1' && couleur_min == couleur_du_sommet(i)) {
+			++couleur_min;
+			i=0;		
+		}
+	}
+return couleur_min;
 }
 
 void tibo() {
