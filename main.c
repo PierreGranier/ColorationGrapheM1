@@ -29,15 +29,17 @@ int main(int argc, char *argv[]) {
 		char ligne[TAILLE_MAX] = "";
 
 		while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
-			puts(ligne);
+			// puts(ligne);
 			if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
 				char nb_sommets[TAILLE_MAX] = "";
 				char nb_aretes[TAILLE_MAX] = "";
-				int i;
-				for(i=6; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
-					nb_sommets[i-6] = ligne[i];	//nb_sommet est une chaine
+				int i = 2; // ligne[2] = c ou e (pour col ou edge)
+				while (ligne[i] != ' ') ++i; // p col ou p edge
+				int j = ++i; // ++i car il faut passer l'espace avant x
+				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
+					nb_sommets[i-j] = ligne[i];	// nb_sommet est une chaine
 				}
-				int j = ++i;
+				j = ++i; // ++i icar il faut passer l'espace avant y
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					nb_aretes[i-j] = ligne[i];
 				}
@@ -59,7 +61,6 @@ int main(int argc, char *argv[]) {
 				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 					deuxieme_sommet[i-j] = ligne[i];
 				}
-				printf("tentative d'ajout de l'arête à indices (%d, %d)\n", atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);
 				ajouter_arete(atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);		// le -1 sert parce que le tableau commence à 0 contrairement au num du sommet 
 			}
 		}
