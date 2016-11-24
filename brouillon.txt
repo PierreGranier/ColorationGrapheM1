@@ -1,39 +1,35 @@
+// TODO
 optimiser en cherchant la plus petite couleur dispo pour un sommet
-make launch xxx.txt
-affichage peut etre a la fin de chaque while
-faire mon algo
+dans le main, ajouter la possibilité que ca soit p edge a la place de p col
+faire algo tibo
+dans le rapport, on pourra faire un tableau comme le prof : colonne nom du fichier, colonne best K du prof et autant de colonnes best K que nous avons implémenté d'algos
+dans le rapport, temps d'exec osef ? cf énoncé
+nettoyer le code (commentaires à virer, noms de foncction)
+le recap de coloriage doit etre envoyé dans un fichier texte
+tout les graphes dans un dossier + script bash ?
 
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
-clique :
-max_clique = 0;
-pour chaque sommet i de ARETES
-	tableau[1] bros
-	bros.ajoutez(i)
-	pour chaque sommet j de ARETES
-		// s'il y a une arête entre j et tous les sommets du tableau, ce sommet fait partie de la clique
-		int ajouter = 1
-		k = 0
-		tq k < bros.taille et ajouter = 1
-			si j != k et ARETES[j][k] = '0'
-				ajouter = 0
-		si ajouter = 1
-			bros.ajouter(k)
-	fin pour
-	si bros.taille > max_clique
-		max_clique = bros.taille
-fin pour
 
 // technique de coloriage :
-// commencer par le sommet qui a le plus de freres
-// lui mettre une couleur de depart (0)
-// ses freres avec une couleur sommet.couleur+1
-// rappeller la fonction sur chaque sommet
+// pour chaque sommet, chercher parmi ses voisins la plus petite couleur non disponible et l'attribuer directement au sommet
+plus_petite_couleur = 0;
+for (int j = 0; j < NOMBRE_SOMMETS; ++j) {
+	if (couleur(j) == plus_petite_couleur) {
+		++plus_petite_couleur;
+		j = 0;
+	}
+}
 
 
 // COMPARAISON ENTRE MATRICE OU TABLEAU POUR LES COULEURS
-// compter les sommets avec la couleur k => possible avec matrice et tableau
+// compter les sommets pour la couleur k => possible avec matrice et tableau
 // connaitre la couleur d'un sommet => plus rapide avec un tableau : O(1) contre O(N) : constant contre linéaire
+// d'autres trucs, comparer les fichiers c (couleurs_tableau et couleurs_matrice)
 
+n <= c <= d + 1
+n : ordre du plus grand sous-graphe complet (clique)
+c : nombre chromatique (nombre de couleurs permettant de colorier un graphe sans que deux sommets voisins soient de la même couleur)
+d : degré le plus élévé des sommets
 
 
 https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/chapitre3.html

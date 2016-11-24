@@ -43,10 +43,11 @@ void liberer_couleurs() {
  * Redimensionne la taille de la matrice des couleurs en rajoutant un bloc de lignes
  */
 void ajouter_couleur() {
+	++NOMBRE_DE_COULEURS;
+
 	// Lorsque le nombre de couleurs proposé par la matrice n'est pas suffisant il faut ajouter des tableaux à une dimension dans la matrice des couleurs
 	// Il faut donc réallouer l'espace pour la matrice en prenant soin de sauvegarder les données de cette dernière et des les recopier une fois l'allocation faite
 
-	++NOMBRE_DE_COULEURS;
 	// Si la matrice des couleurs ne donne pas assez de places il faut l'agrandir
 	if (NOMBRE_DE_COULEURS > blocs_alloues*TAILLE_BLOC) {
 		char** couleurs_sauvegarde = (char**)malloc(blocs_alloues*TAILLE_BLOC * sizeof(char*));
@@ -82,6 +83,8 @@ void ajouter_couleur() {
 			free(couleurs_sauvegarde[i]);
 		}
 		free(couleurs_sauvegarde);
+		
+		// printf("\nMemoire de la matrice de couleurs augmentée de %d lignes (10 couleurs) : %d couleurs\n", TAILLE_BLOC, blocs_alloues*TAILLE_BLOC);
 	}
 
 	/*
@@ -153,11 +156,11 @@ void associer_couleur(int indice_sommet, int indice_couleur) {
 /*
  * Retourne la couleur du sommet
  */
-char couleur_du_sommet(int indice_sommet) {
+int couleur_du_sommet(int indice_sommet) {
 	for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
 		if (MATRICE_COULEURS[i][indice_sommet] == '1') {
 			return i;
 		}
 	}
-	return '-';
+	return -1;
 }

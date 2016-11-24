@@ -20,12 +20,13 @@ void format_standard_aretes();
 void format_standard_couleurs();
 void ajouter_arete(int indice1, int indice2);
 void associer_couleur(int indice_sommet, int indice_couleur);
-char couleur_du_sommet(int indice_sommet);
+int couleur_du_sommet(int indice_sommet);
 
 // FONCTIONS POUR LE COLORIAGE
 // implémentées dans fonctions.c
 
 int compter_couleurs();
 int est_bien_colorie();
+int clique_maximum();
 void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 void tibo();
