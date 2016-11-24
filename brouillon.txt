@@ -11,14 +11,17 @@ tout les graphes dans un dossier + script bash ?
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
 
 // technique de coloriage :
-// pour chaque sommet, chercher parmi ses voisins la plus petite couleur non disponible et l'attribuer directement au sommet
+// pour chaque sommet, chercher parmi ses voisins la plus petite couleur disponible (non utilisée) et l'attribuer directement au sommet
 plus_petite_couleur = 0;
 for (int j = 0; j < NOMBRE_SOMMETS; ++j) {
-	if (couleur(j) == plus_petite_couleur) {
+	if (MATRICE_ARETE[i][j] == '1' && couleur(j) == plus_petite_couleur) {
 		++plus_petite_couleur;
 		j = 0;
 	}
 }
+
+// autre technique, plus opti ? onsépa, fotester
+// pour chaque sommet, chercher parmi ses voisins la plus petite couleur disponible (non utilisée) et l'attribuer directement au sommet
 
 
 // COMPARAISON ENTRE MATRICE OU TABLEAU POUR LES COULEURS
