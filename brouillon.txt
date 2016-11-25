@@ -18,6 +18,10 @@ for (int j = 0; j < NOMBRE_SOMMETS; ++j) {
 	}
 }
 
+for(int i = 0; i< NOMBRE_SOMMETS; ++i) {
+	associer_couleur(i, chercher_premiere_couleur(i));
+}
+
 // autre technique, plus opti ? onsépa, fotester
 // pour chaque sommet i, chercher parmi ses voisins la plus petite couleur disponible (non utilisée) pour i et l'attribuer directement au sommet i
 // pour chaque sommet j, si il est voisin de i et qu'il n'a pas de couleur on lui attribut la plus petite couleur dispo pour j

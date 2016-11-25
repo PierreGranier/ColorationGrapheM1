@@ -45,9 +45,8 @@ int main(int argc, char *argv[]) {
 				}
 				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
 				NOMBRE_D_ARETES = atoi(nb_aretes);
-				printf("\n# Initialisation des tableaux d'arêtes et de couleurs : ");
+				printf("\n# Initialisation de la matrice d'arêtes : ");
 				initialiser_aretes();
-				initialiser_couleurs();
 				printf("OK");
 				printf("\n# Ajout des arêtes : ");
 			} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
@@ -80,16 +79,29 @@ int main(int argc, char *argv[]) {
 
 	/* CODE */
 
+	
 	// afficher_aretes(10);
 	// afficher_couleurs(10);
 	// format_standard_matrice_aretes();
 	
 	printf("\n########################################\n");
-	printf("# COLORIAGE DE OUF TROP BIEN LOLPASTESTTRUCBOBMDR");
+	printf("# COLORIAGE AVEC LE PREMIER ALGORITHME");
 	printf("\n########################################\n");
 
+	initialiser_couleurs();
 	meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 	
+	printf("\nNombre de couleurs utilisées : %d\n", compter_couleurs());
+	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
+	printf("Taille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
+
+	printf("\n########################################\n");
+	printf("# COLORIAGE AVEC LE DEUXIEME ALGORITHME");
+	printf("\n########################################\n");
+
+	initialiser_couleurs();
+	tibo();
+
 	printf("\nNombre de couleurs utilisées : %d\n", compter_couleurs());
 	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
 	printf("Taille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
@@ -98,7 +110,6 @@ int main(int argc, char *argv[]) {
 	printf("# RECAP POUR LE COMPTE RENDU");
 	printf("\n########################################\n");
 
-	// afficher_couleurs(10);
 	format_standard_couleurs();
 
 	liberer_aretes();

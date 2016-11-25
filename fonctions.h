@@ -10,15 +10,18 @@ char** MATRICE_ARETES;
 // implémentées dans les .c du dossier structures
 
 void initialiser_aretes();
-void initialiser_couleurs();
-void ajouter_couleurs(int indice_couleur);
 void liberer_aretes();
-void liberer_couleurs();
 void afficher_aretes(int pourcentage_visible);
-void afficher_couleurs(int pourcentage_visible);
 void format_standard_aretes();
-void format_standard_couleurs();
 void ajouter_arete(int indice1, int indice2);
+int ordre_du_sommet(int i);
+int clique_maximum();
+
+void initialiser_couleurs();
+void liberer_couleurs();
+void ajouter_couleurs(int indice_couleur);
+void afficher_couleurs(int pourcentage_visible);
+void format_standard_couleurs();
 void associer_couleur(int indice_sommet, int indice_couleur);
 int couleur_du_sommet(int indice_sommet);
 
@@ -27,8 +30,8 @@ int couleur_du_sommet(int indice_sommet);
 
 int compter_couleurs();
 int chercher_premiere_couleur(int indice_sommet);
+int est_entierement_colorie();
 int est_bien_colorie();
-int clique_maximum();
 void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
 void tibo();
 
