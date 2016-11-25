@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 	printf("# COLORIAGE DE OUF TROP BIEN LOLPASTESTTRUCBOBMDR");
 	printf("\n########################################\n");
 
-	meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
+	premier_algorithme();
 	
 	printf("\nNombre de couleurs utilisées : %d\n", compter_couleurs());
 	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
