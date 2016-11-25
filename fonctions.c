@@ -140,15 +140,15 @@ void premier_algo_bis() {
 /*
  * Sommets coloriés dans l'ordre croissant de leur ordre (ceux qui ont le plus de voisins sont coloriés en premier)
  */
-void deuxieme_algo() {
+void deuxieme_algorithme() {
 	while (est_entierement_colorie() == 0) {
-		int sommet_max;
+		int sommet_max = 0;
 		int odre_sommet_max = 0;
 		// Pour chaque sommet (non colorié), si son ordre > ordre_sommet_max, on le retient comme étant le sommet_max
 		for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-			if (couleur_du_sommet(i) == -1 && ordre(i) > odre_sommet_max) {
+			if (couleur_du_sommet(i) == -1 && ordre_du_sommet(i) > odre_sommet_max) {
 				sommet_max = i;
-				odre_sommet_max = ordre(i);
+				odre_sommet_max = ordre_du_sommet(i);
 			}
 		}
 		// Associer au sommet max la plus petite couleur disponible (non occupée par ses voisins)
