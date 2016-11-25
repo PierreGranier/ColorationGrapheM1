@@ -32,7 +32,8 @@ int compter_couleurs();
 int chercher_premiere_couleur(int indice_sommet);
 int est_entierement_colorie();
 int est_bien_colorie();
-void meilleur_coloriage_opti_de_ouf_lol_tupeuxpastestmdr();
-void tibo();
+int clique_maximum();
+void premier_algorithme();
+void deuxieme_algorithme();
 
 
