@@ -1,6 +1,7 @@
 // TODO
 dans le rapport, on pourra faire un tableau comme le prof : colonne nom du fichier, colonne best K du prof et autant de colonnes best K que nous avons implémenté d'algos
 le recap de coloriage doit etre envoyé dans un fichier texte
+algo deuxieme ne colorie pas bien
 
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
 
