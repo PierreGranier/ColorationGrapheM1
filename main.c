@@ -164,7 +164,8 @@ int main(int argc, char *argv[]) {
 				afficher_aretes(pourcentage);
 				break;
 			case 8:
-				printf("\nTaille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
+				printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum());
+				printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2());
 				break;
 			default:
 				break;

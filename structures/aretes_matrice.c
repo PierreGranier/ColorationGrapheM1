@@ -189,3 +189,49 @@ int clique_maximum() {
 	}
 	return max_clique;
 }
+
+int ordre_max() {
+	int max = 0;
+	for(int i=0; i<NOMBRE_DE_SOMMETS; ++i) {
+			if(ordre_du_sommet(i) > max) {
+				max = ordre_du_sommet(i);
+			}
+	}
+	return max;
+}
+
+int clique_maximum2() {
+	int max_clique = 0;
+
+	for(int i= 0; i<NOMBRE_DE_SOMMETS; ++i) {
+		int tab_clique[ordre_max()];
+		tab_clique[0] = i;
+		int nb_clique = 1;
+		for(int j=0; j<NOMBRE_DE_SOMMETS; ++j) {
+			
+			/*for(int ct=0; ct<ordre_max(); ++ct) {
+				if(i != tab[ct]) {
+					tab_clique[ct] = i;
+				}
+			}	*/
+			if(MATRICE_ARETES[i][j] == '1') {
+				int ajout_ok=1;
+				//parcourir le tableau et vérifier qu'il y a un lien entre j et chaque sommet du tableau
+				for(int ct=0; ct<nb_clique; ++ct) {
+					if(MATRICE_ARETES[j][tab_clique[ct]] != '1') {
+						ajout_ok = 0;
+						break;
+					}
+					
+				}
+				if(ajout_ok == 1) {
+					tab_clique[++nb_clique] = j;
+				}
+			}
+		}
+		if(nb_clique > max_clique) {
+			max_clique = nb_clique;
+		}
+	}
+	return max_clique;
+}

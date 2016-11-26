@@ -18,6 +18,8 @@ void format_html_aretes();
 void ajouter_arete(int indice1, int indice2);
 int ordre_du_sommet(int indice);
 int clique_maximum();
+int clique_maximum2();
+int ordre_max();
 
 void initialiser_couleurs();
 void liberer_couleurs();
