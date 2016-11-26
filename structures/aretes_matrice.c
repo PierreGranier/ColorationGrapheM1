@@ -53,8 +53,7 @@ void afficher_aretes(int pourcentage_visible) {
 
 	for (int i = 0; i < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++j)
-		// for (int j = 0; j <= i; ++j)
-			(i == j) ? printf("O ") : printf("%c ", MATRICE_ARETES[i][j]);
+			printf("%c ", MATRICE_ARETES[i][j]);
 		printf("\n");
 	}
 }
@@ -72,15 +71,79 @@ void format_standard_aretes() {
 	printf("\n");
 }
 
+void format_html_aretes() {
+	int coords_sommets[2][NOMBRE_DE_SOMMETS]; // ligne x et ligne y
+	int coords_aretes[4][NOMBRE_D_ARETES]; // ligne x et ligne y de départ, ligne width, ligne angle
+	int pas = 400 / NOMBRE_DE_SOMMETS;
+	int x = 0, y = 0, indice_sommet = 0, indice_arete = 0;
+
+	// Répartition des sommets sur une spirale vers le centre
+	while (x+pas <= 100 && indice_sommet < NOMBRE_DE_SOMMETS) {
+		coords_sommets[0][indice_sommet] = x;
+		coords_sommets[1][indice_sommet++] = y;
+		x += pas;
+	}
+	while (y+pas <= 100 && indice_sommet < NOMBRE_DE_SOMMETS) {
+		coords_sommets[0][indice_sommet] = x;
+		coords_sommets[1][indice_sommet++] = y;
+		y += pas;
+	}
+	while (x-pas >= 0 && indice_sommet < NOMBRE_DE_SOMMETS) {
+		coords_sommets[0][indice_sommet] = x;
+		coords_sommets[1][indice_sommet++] = y;
+		x -= pas;
+	}
+	while (y-pas >= 50 && indice_sommet < NOMBRE_DE_SOMMETS) {
+		coords_sommets[0][indice_sommet] = x;
+		coords_sommets[1][indice_sommet++] = y;
+		y -= pas;
+	}
+	while (x+pas <= 50 && indice_sommet < NOMBRE_DE_SOMMETS) {
+		coords_sommets[0][indice_sommet] = x;
+		coords_sommets[1][indice_sommet++] = y;
+		x += pas;
+	}
+
+	// for (int i = 0; i < 2; ++i) {
+	// 	for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
+	// 		printf("%d ", coords_sommets[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
+
+	// Rattachement des arêtes sur les sommets en lien
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
+			if (MATRICE_ARETES[i][j] == '1') {
+				int delta_x = coords_sommets[0][i] - coords_sommets[0][j];
+				int delta_y = coords_sommets[1][i] - coords_sommets[1][j];
+				int angle = (delta_x == 0) ? 90 : (delta_y == 0) ? 0 : atan(delta_y / delta_x);
+				coords_aretes[0][indice_arete] = coords_sommets[0][i];
+				coords_aretes[1][indice_arete] = coords_sommets[1][i];
+				coords_aretes[2][indice_arete] = sqrt(delta_x*delta_x + delta_y*delta_y); // pythagore
+				coords_aretes[3][indice_arete] = angle; // trigonométrie
+				++indice_arete;
+			}
+		}
+	}
+
+	// for (int i = 0; i < 4; ++i) {
+	// 	for (int j = 0; j < NOMBRE_D_ARETES; ++j) {
+	// 		printf("%d ", coords_aretes[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
+
+	// y'a pu ka
+}
+
 /*
  * Retourne le nombre de voisins du sommet donné
  */
-int ordre_du_sommet(int i) {
+int ordre_du_sommet(int indice) {
 	int ordre = 0;
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
-			if (MATRICE_ARETES[i][j] == '1') ++ordre;
-		}
+		if (MATRICE_ARETES[indice][i] == '1') ++ordre;
 	}
 	return ordre;
 }

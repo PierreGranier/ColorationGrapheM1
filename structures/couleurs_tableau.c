@@ -2,7 +2,7 @@
 
 // VARIABLES GLOBALES
 
-int NOMBRE_DE_COULEURS = 0;
+int NOMBRE_DE_COULEURS;
 int* TABLEAU_COULEURS; // matrice avec des char -1 par défaut
 
 // FONCTIONS
@@ -11,6 +11,9 @@ int* TABLEAU_COULEURS; // matrice avec des char -1 par défaut
  * Rien à faire
  */
 void initialiser_couleurs() {
+	// Nombre de couleurs à 0
+	NOMBRE_DE_COULEURS = 0;
+
 	// Dimensionne un tableau à une dimension
 	TABLEAU_COULEURS = (int*)malloc(NOMBRE_DE_SOMMETS * sizeof(int)); // 1xN
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {

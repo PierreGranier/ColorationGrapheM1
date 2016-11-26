@@ -1,10 +1,6 @@
 // TODO
-faire algo tibo
 dans le rapport, on pourra faire un tableau comme le prof : colonne nom du fichier, colonne best K du prof et autant de colonnes best K que nous avons implémenté d'algos
-dans le rapport, temps d'exec osef ? cf énoncé
-nettoyer le code (commentaires à virer, noms de foncction)
 le recap de coloriage doit etre envoyé dans un fichier texte
-tout les graphes dans un dossier + script bash ?
 
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
 

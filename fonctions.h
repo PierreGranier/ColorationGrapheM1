@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 // VARIABLES GLOBALES
 
@@ -13,8 +14,9 @@ void initialiser_aretes();
 void liberer_aretes();
 void afficher_aretes(int pourcentage_visible);
 void format_standard_aretes();
+void format_html_aretes();
 void ajouter_arete(int indice1, int indice2);
-int ordre_du_sommet(int i);
+int ordre_du_sommet(int indice);
 int clique_maximum();
 
 void initialiser_couleurs();
@@ -34,6 +36,6 @@ int est_entierement_colorie();
 int est_bien_colorie();
 int clique_maximum();
 void premier_algorithme();
+void premier_algorithme_bis();
 void deuxieme_algorithme();
-
-
+void troisieme_algorithme();

@@ -78,39 +78,98 @@ int main(int argc, char *argv[]) {
 	printf("\n########################################\n");
 
 	/* CODE */
-
 	
-	// afficher_aretes(10);
-	// afficher_couleurs(10);
-	// format_standard_matrice_aretes();
-	
-	printf("\n########################################\n");
-	printf("# COLORIAGE AVEC LE PREMIER ALGORITHME");
-	printf("\n########################################\n");
+	int choix = 0;
+	while (choix != 9) {
+		printf("\nChoisissez une action à effectuer :");
+		printf("\n\t[0] Comparaison des algorithmes de coloriage");
+		printf("\n\t[1] Colorier avec le premier algorithme (approche naïve)");
+		printf("\n\t[2] Colorier avec le deuxième algorithme (sommets triés par ordre)");
+		printf("\n\t[3] Colorier avec le troisième algorithme (sommets de la clique en premier)");
+		printf("\n\t[7] Voir la matrice des arêtes");
+		printf("\n\t[8] Calculer la taille de la clique maximum (et nombre chromatique)");
+		printf("\n\t[9] Quittez le programme\n");
+		int ok = scanf("%d", &choix);
+		if (ok == 0);
 
-	initialiser_couleurs();
-	premier_algorithme();
-	
-	printf("\nNombre de couleurs utilisées : %d\n", compter_couleurs());
-	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
-	printf("Taille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
-
-	printf("\n########################################\n");
-	printf("# COLORIAGE AVEC LE DEUXIEME ALGORITHME");
-	printf("\n########################################\n");
-
-	initialiser_couleurs();
-	deuxieme_algorithme();
-
-	printf("\nNombre de couleurs utilisées : %d\n", compter_couleurs());
-	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
-	printf("Taille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
-
-	printf("\n########################################\n");
-	printf("# RECAP POUR LE COMPTE RENDU");
-	printf("\n########################################\n");
-
-	format_standard_couleurs();
+		switch (choix) {
+			case 0:
+				printf("\n");
+				int meilleur_algo;
+				int comparaison[3];
+				printf("Premier algorithme en cours...\n");
+					initialiser_couleurs();
+					premier_algorithme();
+					comparaison[0] = NOMBRE_DE_COULEURS;
+					meilleur_algo = 1;
+				printf("Deuxième algorithme en cours...\n");
+					initialiser_couleurs();
+					deuxieme_algorithme();
+					comparaison[1] = NOMBRE_DE_COULEURS;
+					if (comparaison[1] < comparaison[0]) meilleur_algo = 2;
+				printf("Troisième algorithme en cours...\n");
+					initialiser_couleurs();
+					troisieme_algorithme();
+					comparaison[2] = NOMBRE_DE_COULEURS;
+					if (comparaison[2] < comparaison[meilleur_algo-1]) meilleur_algo = 3;
+				printf("\n[%d]\t[%d]\t[%d]", comparaison[0], comparaison[1], comparaison[2]);
+				printf("\nMeilleur algorithme : %d\n", meilleur_algo);
+				break;
+			case 1:
+				printf("\n########################################");
+				printf("\n# COLORIAGE AVEC LE PREMIER ALGORITHME");
+				printf("\n# APPROCHE NAIVE");
+				printf("\n########################################\n");
+				initialiser_couleurs();
+				premier_algorithme();
+				printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
+				printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
+				printf("\n########################################\n");
+				printf("# RECAP POUR LE COMPTE RENDU");
+				printf("\n########################################\n");
+				format_standard_couleurs();
+				break;
+			case 2:
+				printf("\n########################################");
+				printf("\n# COLORIAGE AVEC LE DEUXIEME ALGORITHME");
+				printf("\n# SOMMETS COLORIES PAR ORDRE CROISSANT");
+				printf("\n########################################\n");
+				initialiser_couleurs();
+				deuxieme_algorithme();
+				printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
+				printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
+				printf("\n########################################\n");
+				printf("# RECAP POUR LE COMPTE RENDU");
+				printf("\n########################################\n");
+				format_standard_couleurs();
+				break;
+			case 3:
+				printf("\n########################################");
+				printf("\n# COLORIAGE AVEC LE TROISIEME ALGORITHME");
+				printf("\n# INITIÉ PAR LA CLIQUE MAXIMALE");
+				printf("\n########################################\n");
+				initialiser_couleurs();
+				troisieme_algorithme();
+				printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
+				printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
+				printf("\n########################################\n");
+				printf("# RECAP POUR LE COMPTE RENDU");
+				printf("\n########################################\n");
+				format_standard_couleurs();
+				break;
+			case 7:
+				printf("\nDonnez le pourcentage de la matrice des arêtes à afficher : [?] %%\n");
+				int pourcentage;
+				ok = scanf("%d", &pourcentage);
+				afficher_aretes(pourcentage);
+				break;
+			case 8:
+				printf("\nTaille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
+				break;
+			default:
+				break;
+		}
+	}
 
 	liberer_aretes();
 	liberer_couleurs();

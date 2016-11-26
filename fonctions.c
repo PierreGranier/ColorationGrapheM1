@@ -50,17 +50,20 @@ int est_bien_colorie() {
  */
 int chercher_premiere_couleur(int indice_sommet) {
 	int i, couleur_min = 0;
-	for(i = 0; i<NOMBRE_DE_SOMMETS; ++i) {
+	for(i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		if(MATRICE_ARETES[indice_sommet][i] == '1' && couleur_min == couleur_du_sommet(i)) {
 			++couleur_min;
 			i=0;		
 		}
 	}
-return couleur_min;
+	return couleur_min;
 }
 
 /*
- * Première approche
+ * Sommets non triés
+ * attribution d'une même couleur à tous les sommets sauf au premier
+ * Association d'une nouvelle couleur à un sommet s'il est en conflit
+ * Boucle d'optimisation sur N tours : pour chaque sommet, association de la plus petite couleur non utilisée par ses voisins
  */
 void premier_algorithme() {
 	// Au début, on associe une première couleur au premier sommet
@@ -91,9 +94,9 @@ void premier_algorithme() {
 	//printf("lolilol cest bon tkt = %d\n", est_bien_colorie());
 	//Ok donc maintenant on est sûr que y'a pas de conflits après cette fonction de coloration
 
-	printf("\n================ tour 0 ================\n");
-	printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
-	format_standard_couleurs();
+	// printf("\n================ tour 0 ================\n");
+	// printf("Le graphe est bien colorié : %d\n", est_bien_colorie());
+	// format_standard_couleurs();
 
 	// Enfin, on reparcourt le graphe et on l'améliore en changeant les couleurs si possible : on prend une couleur déjà utilisée
 	int variable_de_changement = 1;
@@ -118,20 +121,20 @@ void premier_algorithme() {
 		}
 		NOMBRE_DE_COULEURS = compter_couleurs();
 
-		printf("\n================ tour %d ================\n", compteur_tours);
-		printf("%d changements de couleur", compteur_changements);
-		printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
-		format_standard_couleurs();
+		// printf("\n================ tour %d ================\n", compteur_tours);
+		// printf("%d changements de couleur", compteur_changements);
+		// printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
+		// format_standard_couleurs();
 	}
 
-	printf("\n================  fini  ================\n%d tours\n", compteur_tours);
-	printf("%d changements de couleur\n", compteur_changements);
+	// printf("\n================  fini  ================\n%d tours\n", compteur_tours);
+	// printf("%d changements de couleur\n", compteur_changements);
 }
 
 /*
  * Sommets non triés, pour chaque voisin, association de la plus petite couleur non utilisée par ses voisins
  */
-void premier_algo_bis() {
+void premier_algorithme_bis() {
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		associer_couleur(i, chercher_premiere_couleur(i));
 	}
@@ -141,7 +144,7 @@ void premier_algo_bis() {
  * Sommets coloriés dans l'ordre croissant de leur ordre (ceux qui ont le plus de voisins sont coloriés en premier)
  */
 void deuxieme_algorithme() {
-	while (est_entierement_colorie() == 0) {
+	/*while (est_entierement_colorie() == 0) {
 		int sommet_max = 0;
 		int odre_sommet_max = 0;
 		// Pour chaque sommet (non colorié), si son ordre > ordre_sommet_max, on le retient comme étant le sommet_max
@@ -153,7 +156,43 @@ void deuxieme_algorithme() {
 		}
 		// Associer au sommet max la plus petite couleur disponible (non occupée par ses voisins)
 		associer_couleur(sommet_max, chercher_premiere_couleur(sommet_max));
+	}*/
+
+	int sommets_tries[NOMBRE_DE_SOMMETS];
+	int ordres_sommets[NOMBRE_DE_SOMMETS];
+
+	// Initialisation des tableaux
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		sommets_tries[i] = i;
+		ordres_sommets[i] = ordre_du_sommet(i);
 	}
+	
+	// Tri à bulle
+	for (int i = NOMBRE_DE_SOMMETS-1; i >= 0; --i) {
+		if (ordres_sommets[i] < ordres_sommets[i+1]) {
+			// Echange des deux entiers dans le tableau des ordres
+			int tmp = ordres_sommets[i];
+			ordres_sommets[i] = ordres_sommets[i+1];
+			ordres_sommets[i+1] = tmp;
+			// Echange des deux entiers dans le tableau des sommets
+			tmp = sommets_tries[i];
+			sommets_tries[i] = sommets_tries[i+1];
+			sommets_tries[i+1] = tmp;
+			// Retour en avant
+			++i;
+			if (i < NOMBRE_DE_SOMMETS-1) ++i;
+		}
+	}
+
+	// Pour chaque sommet du tableau des sommets triés par odre croissant
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		associer_couleur(sommets_tries[i], chercher_premiere_couleur(sommets_tries[i]));
+	}
+
+	// ERREUR c'est pas bien colorié wtf
 }
 
 // tenter avec un algo qui part du sommet qui a le plus grand ordre et qui apartient à la plus grande clique
+void troisieme_algorithme() {
+
+}

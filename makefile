@@ -1,6 +1,6 @@
 #makefile
 
-CFLAGS=-Wall
+CFLAGS=-Wall -lm
 OFLAGS=-O2
 
 STRUCTURE_COULEURS=tableau

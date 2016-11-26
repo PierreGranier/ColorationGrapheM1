@@ -4,7 +4,7 @@
 
 // VARIABLES GLOBALES
 
-int NOMBRE_DE_COULEURS = 0;
+int NOMBRE_DE_COULEURS;
 char** MATRICE_COULEURS; // matrice avec des char 1 ou 0, 0 par défaut
 int blocs_alloues = 0;
 
@@ -14,6 +14,9 @@ int blocs_alloues = 0;
  * Alloue la mémoire suffisante pour la matrice et la remplie de '0'
  */
 void initialiser_couleurs() {
+	// Nombre de couleurs à 0
+	NOMBRE_DE_COULEURS = 0;
+	
 	// Dimensionne un tableau à deux dimensions
     ++blocs_alloues;
 	MATRICE_COULEURS = (char**)malloc(blocs_alloues*TAILLE_BLOC * sizeof(char*)); // TAILLE_BLOCxN
@@ -85,22 +88,6 @@ void ajouter_couleur() {
 		free(couleurs_sauvegarde);
 		
 		// printf("\nMemoire de la matrice de couleurs augmentée de %d lignes (10 couleurs) : %d couleurs\n", TAILLE_BLOC, blocs_alloues*TAILLE_BLOC);
-	}
-
-	/*
-	* Affiche les matrices, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
-	*/
-	void afficher_matrice_couleurs(int pourcentage_visible) {
-		printf("\n########################################");
-		printf("\n# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, pourcentage_visible);
-		printf("\n########################################\n\n");
-
-		for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
-			for (int j = 0; j < NOMBRE_DE_SOMMETS*pourcentage_visible/100; ++j) {
-				printf("%c ", MATRICE_COULEURS[i][j]);
-			}
-			printf("\n");
-		}
 	}
 }
 
