@@ -61,7 +61,7 @@ void afficher_aretes(int pourcentage_visible) {
 /*
  * Retourne une chaine de charactères de la matrice des arêtes au format standard
  */
-void format_standard_aretes() {
+void format_standard_aretes(char* nom_fichier) {
 	printf("\np col %d %d\n", NOMBRE_DE_SOMMETS, NOMBRE_D_ARETES);
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j <= i; ++j) {
@@ -71,13 +71,14 @@ void format_standard_aretes() {
 	printf("\n");
 }
 
-void format_html_aretes() {
+void format_html_aretes(char* nom_fichier) {
 	int coords_sommets[2][NOMBRE_DE_SOMMETS]; // ligne x et ligne y
-	int coords_aretes[4][NOMBRE_D_ARETES]; // ligne x et ligne y de départ, ligne width, ligne angle
+	int coords_aretes[5][NOMBRE_D_ARETES]; // ligne x et ligne y de départ, ligne width, ligne angle
+	// si on met 4, coords_aretes[3][i] rempalce les valeurs de coords_sommets... wtf
 	int pas = 400 / NOMBRE_DE_SOMMETS;
 	int x = 0, y = 0, indice_sommet = 0, indice_arete = 0;
 
-	// Répartition des sommets sur une spirale vers le centre
+	// Répartition des coordonnées sur une spirale vers le centre
 	while (x+pas <= 100 && indice_sommet < NOMBRE_DE_SOMMETS) {
 		coords_sommets[0][indice_sommet] = x;
 		coords_sommets[1][indice_sommet++] = y;
@@ -110,8 +111,8 @@ void format_html_aretes() {
 	// 	}
 	// 	printf("\n");
 	// }
-
-	// Rattachement des arêtes sur les sommets en lien
+	
+	// Ajout des coordonnées des arêtes sur les coordonnées des sommets frêres
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 			if (MATRICE_ARETES[i][j] == '1') {
@@ -134,7 +135,34 @@ void format_html_aretes() {
 	// 	printf("\n");
 	// }
 
-	// y'a pu ka
+	// Tout dans un fichier html éponyme
+	char sans_extension[strlen(nom_fichier)];
+	int copier = 0;
+	for (int i = strlen(nom_fichier)-1; i >= 0; --i) {
+		sans_extension[i] = (copier == 1) ? nom_fichier[i] : '\0';
+		if (nom_fichier[i] == '.') copier = 1;
+	}
+
+	FILE* fichier = NULL;
+	fichier = fopen(strcat(sans_extension, ".html"), "w");
+
+	if (fichier != NULL)
+	{
+		fprintf(fichier, "<style>* { margin: 0; padding: 0; }");
+		fprintf(fichier, "sommet { position: absolute; width: 15px; height: 15px; text-align: center; font-size: 8px; color: darkslategray; background: white; border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 10px; box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.3); }");
+		fprintf(fichier, "arete { position: absolute; height: 1px; background: rgba(0, 0, 0, 0.3); box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.3); }</style>");
+		fprintf(fichier, "<graphe>");
+
+		for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+			fprintf(fichier, "<sommet style=\"left: %dpx; top: %dpx\">%d</sommet>", coords_sommets[0][i]*pas, coords_sommets[1][i]*pas, i+1);
+		}
+		for (int i = 0; i < NOMBRE_D_ARETES-200; ++i) {
+			fprintf(fichier, "<arete style=\"left: %dpx; top: %dpx; width: %dpx; transform: rotate(%ddeg)\"></arete>", coords_aretes[0][i]*pas, coords_aretes[1][i]*pas, coords_aretes[2][i]*pas, coords_aretes[3][i]);
+		}
+
+		fprintf(fichier, "</graphe");
+		fclose(fichier);
+	}
 }
 
 /*

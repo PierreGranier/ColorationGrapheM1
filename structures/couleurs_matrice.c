@@ -110,7 +110,7 @@ void afficher_couleurs(int pourcentage_visible) {
 /*
  * Retourne une chaine de charactères de la matrice des couleurs au format standard
  */
-void format_standard_couleurs() {
+void format_standard_couleurs(char* nom_fichier) {
 	printf("\nK=%d\n", NOMBRE_DE_COULEURS);
 	for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 		int couleur = -1; // -1 = pas de couleur assignée

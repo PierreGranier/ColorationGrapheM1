@@ -52,7 +52,7 @@ void afficher_couleurs(int pourcentage_visible) {
 /*
  * Retourne une chaine de charactères du tableau des couleurs au format standard
  */
-void format_standard_couleurs() {
+void format_standard_couleurs(char* nom_fichier) {
 	printf("\nK=%d\n", NOMBRE_DE_COULEURS);
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
         printf(" %i ", TABLEAU_COULEURS[i]);

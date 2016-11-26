@@ -7,172 +7,186 @@
 #define TAILLE_MAX 90
 
 int main(int argc, char *argv[]) {
+	int ok = 1;
 
-	/* LECTURE DU FICHIER */
+	int choix = -1;
+	while (choix != 10) {
+		char nom_fichier[TAILLE_MAX];
 
-	char* nom_fichier;
+		if (choix == -1 || choix == 9) {
+			/* LECTURE DU FICHIER */
 
-	if (argc == 1) { // argv[0] = le nom du fichier exécuté
-		printf("Donner en paramètre le nom du fichier à exploiter\n");
-		return EXIT_SUCCESS;
-	} else {
-		nom_fichier = (char*)malloc(strlen(argv[1]) * sizeof(char*)); // redimensionnement du tableau de char
-		strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
-		printf("\n########################################");
-		printf("\n# Lecture du fichier %s", nom_fichier);
-	}
+			/*char* nom_fichier;
 
-	FILE* fichier;
-	fichier = fopen(nom_fichier, "r");
+			if (argc == 1) { // argv[0] = le nom du fichier exécuté
+				printf("Donner en paramètre le nom du fichier à exploiter\n");
+				return EXIT_SUCCESS;
+			} else {
+				nom_fichier = (char*)malloc(strlen(argv[1]) * sizeof(char*)); // redimensionnement du tableau de char
+				strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
+			}*/
 
-	if (fichier != NULL) {		// Ouverture ficher = OK
-		char ligne[TAILLE_MAX] = "";
+			printf("\nNom du fichier contenant le graphe : ");
+			ok = scanf("%s", nom_fichier);
 
-		while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
-			// puts(ligne);
-			if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
-				char nb_sommets[TAILLE_MAX] = "";
-				char nb_aretes[TAILLE_MAX] = "";
-				int i = 2; // ligne[2] = c ou e (pour col ou edge)
-				while (ligne[i] != ' ') ++i; // p col ou p edge
-				int j = ++i; // ++i car il faut passer l'espace avant x
-				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
-					nb_sommets[i-j] = ligne[i];	// nb_sommet est une chaine
+			FILE* fichier = NULL;
+			fichier = fopen(nom_fichier, "r");
+
+			if (fichier != NULL) {		// Ouverture ficher = OK
+				printf("\n########################################");
+				printf("\n# Lecture du fichier %s", nom_fichier);
+				
+				char ligne[TAILLE_MAX] = "";
+
+				while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
+					// puts(ligne);
+					if(ligne[0] == 'p') { // p col x y		avec x le nombre de sommets et y le nombre d'arêtes
+						char nb_sommets[TAILLE_MAX] = "";
+						char nb_aretes[TAILLE_MAX] = "";
+						int i = 2; // ligne[2] = c ou e (pour col ou edge)
+						while (ligne[i] != ' ') ++i; // p col ou p edge
+						int j = ++i; // ++i car il faut passer l'espace avant x
+						for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
+							nb_sommets[i-j] = ligne[i];	// nb_sommet est une chaine
+						}
+						j = ++i; // ++i icar il faut passer l'espace avant y
+						for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
+							nb_aretes[i-j] = ligne[i];
+						}
+						NOMBRE_DE_SOMMETS = atoi(nb_sommets);
+						NOMBRE_D_ARETES = atoi(nb_aretes);
+						printf("\n# Initialisation de la matrice d'arêtes : ");
+						initialiser_aretes();
+						printf("OK");
+						printf("\n# Ajout des arêtes : ");
+					} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
+						char premier_sommet[TAILLE_MAX] = "";
+						char deuxieme_sommet[TAILLE_MAX] = "";
+						int i;
+						for(i=2; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
+							premier_sommet[i-2] = ligne[i];
+						}
+						int j = ++i;
+						for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
+							deuxieme_sommet[i-j] = ligne[i];
+						}
+						ajouter_arete(atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);		// le -1 sert parce que le tableau commence à 0 contrairement au num du sommet 
+					}
 				}
-				j = ++i; // ++i icar il faut passer l'espace avant y
-				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
-					nb_aretes[i-j] = ligne[i];
-				}
-				NOMBRE_DE_SOMMETS = atoi(nb_sommets);
-				NOMBRE_D_ARETES = atoi(nb_aretes);
-				printf("\n# Initialisation de la matrice d'arêtes : ");
-				initialiser_aretes();
 				printf("OK");
-				printf("\n# Ajout des arêtes : ");
-			} else if (ligne[0] == 'e') { // e x y		avec x et y le label de deux sommets
-				char premier_sommet[TAILLE_MAX] = "";
-				char deuxieme_sommet[TAILLE_MAX] = "";
-				int i;
-				for(i=2; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
-					premier_sommet[i-2] = ligne[i];
-				}
-				int j = ++i;
-				for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
-					deuxieme_sommet[i-j] = ligne[i];
-				}
-				ajouter_arete(atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);		// le -1 sert parce que le tableau commence à 0 contrairement au num du sommet 
+				fclose(fichier);		// On ferme le fichier
+				printf("\n# Fin de la lecture du fichier");
+				printf("\n########################################\n");
+			}
+			else {						// Echec de l'ouverture du fichier
+				printf("Impossible d'ouvrir le fichier %s\n", nom_fichier);
+				// return EXIT_SUCCESS;
+				ok = 0;
 			}
 		}
-	}
-	else					// Echec de l'ouverture du fichier
-	{
-		printf("Impossible d'ouvrir le fichier %s", nom_fichier);
-	}
 
-	printf("OK");
+		/* CODE */
 
-	fclose(fichier);		// On ferme le fichier
-	free(nom_fichier);
+		if (ok != 0) {
+			format_html_aretes(nom_fichier);
 
-	printf("\n# Fin de la lecture du fichier");
-	printf("\n########################################\n");
+			printf("\n\n\n\n########################################");
+			printf("\n# %s", nom_fichier);
+			printf("\n########################################");
+			printf("\nChoisissez une action à effectuer :");
+			printf("\n\t[0] Comparaison des algorithmes de coloriage");
+			printf("\n\t[1] Colorier avec le premier algorithme (approche naïve)");
+			printf("\n\t[2] Colorier avec le deuxième algorithme (sommets triés par ordre)");
+			printf("\n\t[3] Colorier avec le troisième algorithme (sommets de la clique en premier)");
+			printf("\n\t[4] Voir la matrice des arêtes");
+			printf("\n\t[5] Calculer la taille de la clique maximum (et nombre chromatique)");
+			printf("\n\t[9] Lire un autre graphe");
+			printf("\n\t[10] Quittez le programme\n");
+			ok = scanf("%d", &choix);
+			if (ok == 0);
 
-	/* CODE */
-	
-	int choix = 0;
-	while (choix != 9) {
-		printf("\nChoisissez une action à effectuer :");
-		printf("\n\t[0] Comparaison des algorithmes de coloriage");
-		printf("\n\t[1] Colorier avec le premier algorithme (approche naïve)");
-		printf("\n\t[2] Colorier avec le deuxième algorithme (sommets triés par ordre)");
-		printf("\n\t[3] Colorier avec le troisième algorithme (sommets de la clique en premier)");
-		printf("\n\t[7] Voir la matrice des arêtes");
-		printf("\n\t[8] Calculer la taille de la clique maximum (et nombre chromatique)");
-		printf("\n\t[9] Quittez le programme\n");
-		int ok = scanf("%d", &choix);
-		if (ok == 0);
+			printf("\n\n\n\n");
 
-		switch (choix) {
-			case 0:
-				printf("\n");
-				int meilleur_algo;
-				int comparaison[3];
-				printf("Premier algorithme en cours...\n");
+			switch (choix) {
+				case 0:
+					printf("\n########################################");
+					printf("\n# EXECUTION ET COMPARAISON DES TROIS ALGOS");
+					printf("\n########################################\n");
+					int meilleur_algo;
+					int comparaison[3];
+					printf("\nPremier algorithme en cours de coloriage...\n");
+						initialiser_couleurs();
+						premier_algorithme();
+						printf("# %d couleurs\n\n", NOMBRE_DE_COULEURS);
+						comparaison[0] = NOMBRE_DE_COULEURS;
+						meilleur_algo = 1;
+					printf("Deuxième algorithme en cours de coloriage...\n");
+						initialiser_couleurs();
+						deuxieme_algorithme();
+						printf("# %d couleurs\n\n", NOMBRE_DE_COULEURS);
+						comparaison[1] = NOMBRE_DE_COULEURS;
+						if (comparaison[1] < comparaison[0]) meilleur_algo = 2;
+					printf("Troisième algorithme en cours de coloriage...\n");
+						initialiser_couleurs();
+						troisieme_algorithme();
+						printf("# %d couleurs\n\n", NOMBRE_DE_COULEURS);
+						comparaison[2] = NOMBRE_DE_COULEURS;
+						if (comparaison[2] < comparaison[meilleur_algo-1]) meilleur_algo = 3;
+					printf("Meilleur algorithme : %d\n", meilleur_algo);
+					break;
+				case 1:
+					printf("\n########################################");
+					printf("\n# COLORIAGE AVEC LE PREMIER ALGORITHME");
+					printf("\n# APPROCHE NAIVE");
+					printf("\n########################################\n");
 					initialiser_couleurs();
 					premier_algorithme();
-					comparaison[0] = NOMBRE_DE_COULEURS;
-					meilleur_algo = 1;
-				printf("Deuxième algorithme en cours...\n");
+					printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
+					printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
+					break;
+				case 2:
+					printf("\n########################################");
+					printf("\n# COLORIAGE AVEC LE DEUXIEME ALGORITHME");
+					printf("\n# SOMMETS COLORIES PAR ORDRE CROISSANT");
+					printf("\n########################################\n");
 					initialiser_couleurs();
 					deuxieme_algorithme();
-					comparaison[1] = NOMBRE_DE_COULEURS;
-					if (comparaison[1] < comparaison[0]) meilleur_algo = 2;
-				printf("Troisième algorithme en cours...\n");
+					printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
+					printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
+					break;
+				case 3:
+					printf("\n########################################");
+					printf("\n# COLORIAGE AVEC LE TROISIEME ALGORITHME");
+					printf("\n# INITIÉ PAR LA CLIQUE MAXIMALE");
+					printf("\n########################################\n");
 					initialiser_couleurs();
 					troisieme_algorithme();
-					comparaison[2] = NOMBRE_DE_COULEURS;
-					if (comparaison[2] < comparaison[meilleur_algo-1]) meilleur_algo = 3;
-				printf("\n[%d]\t[%d]\t[%d]", comparaison[0], comparaison[1], comparaison[2]);
-				printf("\nMeilleur algorithme : %d\n", meilleur_algo);
-				break;
-			case 1:
-				printf("\n########################################");
-				printf("\n# COLORIAGE AVEC LE PREMIER ALGORITHME");
-				printf("\n# APPROCHE NAIVE");
-				printf("\n########################################\n");
-				initialiser_couleurs();
-				premier_algorithme();
-				printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
-				printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
-				printf("\n########################################\n");
-				printf("# RECAP POUR LE COMPTE RENDU");
-				printf("\n########################################\n");
-				format_standard_couleurs();
-				break;
-			case 2:
-				printf("\n########################################");
-				printf("\n# COLORIAGE AVEC LE DEUXIEME ALGORITHME");
-				printf("\n# SOMMETS COLORIES PAR ORDRE CROISSANT");
-				printf("\n########################################\n");
-				initialiser_couleurs();
-				deuxieme_algorithme();
-				printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
-				printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
-				printf("\n########################################\n");
-				printf("# RECAP POUR LE COMPTE RENDU");
-				printf("\n########################################\n");
-				format_standard_couleurs();
-				break;
-			case 3:
-				printf("\n########################################");
-				printf("\n# COLORIAGE AVEC LE TROISIEME ALGORITHME");
-				printf("\n# INITIÉ PAR LA CLIQUE MAXIMALE");
-				printf("\n########################################\n");
-				initialiser_couleurs();
-				troisieme_algorithme();
-				printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
-				printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());
-				printf("\n########################################\n");
-				printf("# RECAP POUR LE COMPTE RENDU");
-				printf("\n########################################\n");
-				format_standard_couleurs();
-				break;
-			case 7:
-				printf("\nDonnez le pourcentage de la matrice des arêtes à afficher : [?] %%\n");
-				int pourcentage;
-				ok = scanf("%d", &pourcentage);
-				afficher_aretes(pourcentage);
-				break;
-			case 8:
-				printf("\nTaille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
-				break;
-			default:
-				break;
-		}
+					printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
+					printf("\nLe graphe est bien colorié : %d\n", est_bien_colorie());	
+					break;
+				case 4:
+					printf("\nDonnez le pourcentage de la matrice des arêtes à afficher : [?] %%\n");
+					int pourcentage;
+					ok = scanf("%d", &pourcentage);
+					afficher_aretes(pourcentage);
+					break;
+				case 5:
+					printf("\nTaille de la clique maximum (nombre chromatique) : %d\n", clique_maximum());
+					break;
+				case 9:
+					liberer_aretes();
+					liberer_couleurs();
+					// free(nom_fichier);
+				default:
+					break;
+			}
+			
+			if (choix == 0 || choix == 1 || choix == 2 || choix == 3) {
+				printf("\nENREGISTRE DANS FICHER");
+				format_standard_couleurs(nom_fichier);
+			}
+		} // fin if ok == 0
 	}
-
-	liberer_aretes();
-	liberer_couleurs();
 
 	return EXIT_SUCCESS;
 }

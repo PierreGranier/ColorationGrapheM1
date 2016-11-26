@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 // VARIABLES GLOBALES
 
@@ -13,8 +14,8 @@ char** MATRICE_ARETES;
 void initialiser_aretes();
 void liberer_aretes();
 void afficher_aretes(int pourcentage_visible);
-void format_standard_aretes();
-void format_html_aretes();
+void format_standard_aretes(char* nom_fichier);
+void format_html_aretes(char* nom_fichier);
 void ajouter_arete(int indice1, int indice2);
 int ordre_du_sommet(int indice);
 int clique_maximum();
@@ -23,7 +24,7 @@ void initialiser_couleurs();
 void liberer_couleurs();
 void ajouter_couleurs(int indice_couleur);
 void afficher_couleurs(int pourcentage_visible);
-void format_standard_couleurs();
+void format_standard_couleurs(char* nom_fichier);
 void associer_couleur(int indice_sommet, int indice_couleur);
 int couleur_du_sommet(int indice_sommet);
 
