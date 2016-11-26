@@ -204,7 +204,8 @@ int clique_maximum2() {
 	int max_clique = 0;
 
 	for(int i= 0; i<NOMBRE_DE_SOMMETS; ++i) {
-		int tab_clique[ordre_max()];
+		int* tab_clique;
+		tab_clique = (int*) malloc(ordre_max()*sizeof(int));
 		tab_clique[0] = i;
 		int nb_clique = 1;
 		for(int j=0; j<NOMBRE_DE_SOMMETS; ++j) {
@@ -218,20 +219,21 @@ int clique_maximum2() {
 				int ajout_ok=1;
 				//parcourir le tableau et vérifier qu'il y a un lien entre j et chaque sommet du tableau
 				for(int ct=0; ct<nb_clique; ++ct) {
-					if(MATRICE_ARETES[j][tab_clique[ct]] != '1') {
+					if(MATRICE_ARETES[j][tab_clique[ct]] == '0') {
 						ajout_ok = 0;
 						break;
 					}
 					
 				}
 				if(ajout_ok == 1) {
-					tab_clique[++nb_clique] = j;
+					tab_clique[nb_clique++] = j;
 				}
 			}
 		}
 		if(nb_clique > max_clique) {
 			max_clique = nb_clique;
 		}
+		free(tab_clique);
 	}
-	return max_clique;
+return max_clique;
 }
