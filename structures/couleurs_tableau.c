@@ -53,11 +53,27 @@ void afficher_couleurs(int pourcentage_visible) {
  * Retourne une chaine de charactères du tableau des couleurs au format standard
  */
 void format_standard_couleurs(char* nom_fichier) {
-	printf("\nK=%d\n", NOMBRE_DE_COULEURS);
-	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-        printf(" %i ", TABLEAU_COULEURS[i]);
+	char sans_extension[5+strlen(nom_fichier)];
+	int copier = 0;
+	for (int i = strlen(nom_fichier)-1; i >= 0; --i) {
+		sans_extension[i] = (copier == 1) ? nom_fichier[i] : '\0';
+		if (nom_fichier[i] == '.') copier = 1;
 	}
-	printf("\n");
+
+	FILE* fichier = NULL;
+	fichier = fopen(strcat(sans_extension, "_out.txt"), "w");
+
+	if (fichier != NULL) {
+		fprintf(fichier, "\nK=%d\n", NOMBRE_DE_COULEURS);
+		for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+			fprintf(fichier, " %i ", TABLEAU_COULEURS[i]);
+		}
+		fprintf(fichier, "\n");
+
+		fclose(fichier);
+	}
+
+
 }
 
 /*

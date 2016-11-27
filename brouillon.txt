@@ -1,24 +1,8 @@
 // TODO
-dans le rapport, on pourra faire un tableau comme le prof : colonne nom du fichier, colonne best K du prof et autant de colonnes best K que nous avons implémenté d'algos
-le recap de coloriage doit etre envoyé dans un fichier texte
-algo deuxieme ne colorie pas bien
+algo deuxieme ne colorie pas bien : quand on fait [5] cliques puis [2) algo deux, erreur seg.
 timers à mettre dans le main.c
 
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
-
-// technique de coloriage :
-// pour chaque sommet, chercher parmi ses voisins la plus petite couleur disponible (non utilisée) et l'attribuer directement au sommet
-plus_petite_couleur = 0;
-for (int j = 0; j < NOMBRE_SOMMETS; ++j) {
-	if (MATRICE_ARETE[i][j] == '1' && couleur(j) == plus_petite_couleur) {
-		++plus_petite_couleur;
-		j = 0;
-	}
-}
-
-for(int i = 0; i< NOMBRE_SOMMETS; ++i) {
-	associer_couleur(i, chercher_premiere_couleur(i));
-}
 
 // autre technique, plus opti ? onsépa, fotester
 // pour chaque sommet i, chercher parmi ses voisins la plus petite couleur disponible (non utilisée) pour i et l'attribuer directement au sommet i

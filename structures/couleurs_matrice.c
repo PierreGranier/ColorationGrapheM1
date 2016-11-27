@@ -111,17 +111,31 @@ void afficher_couleurs(int pourcentage_visible) {
  * Retourne une chaine de charactères de la matrice des couleurs au format standard
  */
 void format_standard_couleurs(char* nom_fichier) {
-	printf("\nK=%d\n", NOMBRE_DE_COULEURS);
-	for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
-		int couleur = -1; // -1 = pas de couleur assignée
-		for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
-			if (MATRICE_COULEURS[i][j] == '1') {
-				couleur = (couleur == -1) ? i : -2; // -2 = conflit (+ de 1 couleur assignée à ce sommet)
-			}
-		}
-		printf(" %d ", couleur);
+	char sans_extension[5+strlen(nom_fichier)];
+	int copier = 0;
+	for (int i = strlen(nom_fichier)-1; i >= 0; --i) {
+		sans_extension[i] = (copier == 1) ? nom_fichier[i] : '\0';
+		if (nom_fichier[i] == '.') copier = 1;
 	}
-	printf("\n");
+
+	FILE* fichier = NULL;
+	fichier = fopen(strcat(sans_extension, "_out.txt"), "w");
+
+	if (fichier != NULL) {
+		fprintf(fichier, "\nK=%d\n", NOMBRE_DE_COULEURS);
+		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
+			int couleur = -1; // -1 = pas de couleur assignée
+			for (int i = 0; i < NOMBRE_DE_COULEURS; ++i) {
+				if (MATRICE_COULEURS[i][j] == '1') {
+					couleur = (couleur == -1) ? i : -2; // -2 = conflit (+ de 1 couleur assignée à ce sommet)
+				}
+			}
+			fprintf(fichier, " %d ", couleur);
+		}
+		fprintf(fichier, "\n");
+
+		fclose(fichier);
+	}
 }
 
 /*

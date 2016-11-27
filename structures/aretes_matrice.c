@@ -1,5 +1,7 @@
 #include "../fonctions.h"
 
+#define PI 3.14159265
+
 // VARIABLES GLOBALES
 
 int NOMBRE_DE_SOMMETS = 0, NOMBRE_D_ARETES = 0;
@@ -75,6 +77,27 @@ void format_html_aretes(char* nom_fichier) {
 	int coords_sommets[2][NOMBRE_DE_SOMMETS]; // ligne x et ligne y
 	int coords_aretes[5][NOMBRE_D_ARETES]; // ligne x et ligne y de départ, ligne width, ligne angle
 	// si on met 4, coords_aretes[3][i] rempalce les valeurs de coords_sommets... wtf
+
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		coords_sommets[0][i] = 0;
+		coords_sommets[1][i] = 0;
+	}
+	for (int i = 0; i < NOMBRE_D_ARETES; ++i) {
+		coords_aretes[0][i] = 0;
+		coords_aretes[1][i] = 0;
+		coords_aretes[2][i] = 0;
+		coords_aretes[3][i] = 0;
+	}
+
+	/*int** coords_sommets = (int**)malloc(2 * sizeof(int*)); // 2xN
+	for (int i = 0; i < 2; ++i) { // dimensionne chaque ligne
+		coords_sommets[i] = (int*)calloc(NOMBRE_DE_SOMMETS, sizeof(int));
+	}
+	int** coords_aretes = (int**)malloc(4 * sizeof(int*)); // 4xN
+	for (int i = 0; i < 4; ++i) { // dimensionne chaque ligne
+		coords_aretes[i] = (int*)calloc(NOMBRE_D_ARETES, sizeof(int));
+	}*/
+
 	int pas = 400 / NOMBRE_DE_SOMMETS;
 	int x = 0, y = 0, indice_sommet = 0, indice_arete = 0;
 
@@ -105,6 +128,7 @@ void format_html_aretes(char* nom_fichier) {
 		x += pas;
 	}
 
+	// puts("== coords sommets ==");
 	// for (int i = 0; i < 2; ++i) {
 	// 	for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 	// 		printf("%d ", coords_sommets[i][j]);
@@ -116,20 +140,29 @@ void format_html_aretes(char* nom_fichier) {
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 			if (MATRICE_ARETES[i][j] == '1') {
-				int delta_x = coords_sommets[0][i] - coords_sommets[0][j];
-				int delta_y = coords_sommets[1][i] - coords_sommets[1][j];
-				int angle = (delta_x == 0) ? 90 : (delta_y == 0) ? 0 : atan(delta_y / delta_x);
+				int delta_x = coords_sommets[0][j] - coords_sommets[0][i];
+				int delta_y = coords_sommets[1][j] - coords_sommets[1][i];
+				int longueur = (int) sqrt(delta_x*delta_x + delta_y*delta_y); // pythagore
+				int angle = (delta_x == 0) ? -90 : (delta_y == 0) ? 0 : (int) (atan(delta_y / delta_x) * (180 / PI)); // trigonométrie
+				if (delta_x < 0) angle += 180;
 				coords_aretes[0][indice_arete] = coords_sommets[0][i];
 				coords_aretes[1][indice_arete] = coords_sommets[1][i];
-				coords_aretes[2][indice_arete] = sqrt(delta_x*delta_x + delta_y*delta_y); // pythagore
-				coords_aretes[3][indice_arete] = angle; // trigonométrie
+				coords_aretes[2][indice_arete] = longueur;
+				coords_aretes[3][indice_arete] = angle;
+				// printf("\n---\nLes coord de i : (%d, %d)", coords_sommets[0][i], coords_sommets[1][i]);
+				// printf("\nLes coord de j : (%d, %d)", coords_sommets[0][j], coords_sommets[1][j]);
+				// printf("\nDelta X = %d\nDelta Y = %d", delta_x, delta_y);
+				// printf("\nLongueur = %d", longueur);
+				// printf("\nAngle = %d", angle);
+				// printf(" => x[%d] y[%d] width[%d] rotate[%d]\n", coords_aretes[0][indice_arete] , coords_aretes[1][indice_arete] , coords_aretes[2][indice_arete], coords_aretes[3][indice_arete]);
 				++indice_arete;
 			}
 		}
 	}
 
+	// puts("== coords arêtes ==");
 	// for (int i = 0; i < 4; ++i) {
-	// 	for (int j = 0; j < NOMBRE_D_ARETES; ++j) {
+	// 	for (int j = 0; j < NOMBRE_D_ARETES/4; ++j) {
 	// 		printf("%d ", coords_aretes[i][j]);
 	// 	}
 	// 	printf("\n");
@@ -146,23 +179,48 @@ void format_html_aretes(char* nom_fichier) {
 	FILE* fichier = NULL;
 	fichier = fopen(strcat(sans_extension, ".html"), "w");
 
-	if (fichier != NULL)
-	{
+	if (fichier != NULL) {
 		fprintf(fichier, "<style>* { margin: 0; padding: 0; }");
-		fprintf(fichier, "sommet { position: absolute; width: 15px; height: 15px; text-align: center; font-size: 8px; color: darkslategray; background: white; border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 10px; box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.3); }");
-		fprintf(fichier, "arete { position: absolute; height: 1px; background: rgba(0, 0, 0, 0.3); box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.3); }</style>");
+		fprintf(fichier, "sommet { position: absolute; width: 5px; height: 5px; text-align: center; font-size: 3px; color: darkslategray; background: white; border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 10px; box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.3); }");
+		fprintf(fichier, "arete { position: absolute; height: 1px; background: rgba(255, 0, 0, 0.3); transform-origin: 0 0; }</style>");
 		fprintf(fichier, "<graphe>");
 
+		// puts("== coords sommets ==");
+		// for (int i = 0; i < 2; ++i) {
+		// 	for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
+		// 		printf("%d ", coords_sommets[i][j]);
+		// 	}
+		// 	printf("\n");
+		// }
+
 		for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-			fprintf(fichier, "<sommet style=\"left: %dpx; top: %dpx\">%d</sommet>", coords_sommets[0][i]*pas, coords_sommets[1][i]*pas, i+1);
-		}
-		for (int i = 0; i < NOMBRE_D_ARETES-200; ++i) {
-			fprintf(fichier, "<arete style=\"left: %dpx; top: %dpx; width: %dpx; transform: rotate(%ddeg)\"></arete>", coords_aretes[0][i]*pas, coords_aretes[1][i]*pas, coords_aretes[2][i]*pas, coords_aretes[3][i]);
+			fprintf(fichier, "<sommet style=\"left: %dpx; top: %dpx\">%d</sommet>", coords_sommets[0][i], coords_sommets[1][i], i+1);
 		}
 
-		fprintf(fichier, "</graphe");
+		// puts("== coords arêtes ==");
+		// for (int i = 0; i < 4; ++i) {
+		// 	for (int j = 0; j < NOMBRE_D_ARETES/4; ++j) {
+		// 		printf("%d ", coords_aretes[i][j]);
+		// 	}
+		// 	printf("\n");
+		// }
+
+		for (int i = 0; i < NOMBRE_D_ARETES; ++i) {
+			fprintf(fichier, "<arete style=\"left: %dpx; top: %dpx; width: %dpx; transform: rotate(%ddeg)\"></arete>", coords_aretes[0][i], coords_aretes[1][i], coords_aretes[2][i], coords_aretes[3][i]);
+		}
+
+		fprintf(fichier, "</graphe>");
 		fclose(fichier);
 	}
+
+	// for (int i = 0; i < 2; ++i) {
+	// 	free(coords_sommets[i]);
+	// }
+	// free(coords_sommets);
+	// for (int i = 0; i < 4; ++i) {
+	// 	free(coords_aretes[i]);
+	// }
+	// free(coords_aretes);
 }
 
 /*

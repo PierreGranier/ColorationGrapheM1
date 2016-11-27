@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 						for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de x
 							nb_sommets[i-j] = ligne[i];	// nb_sommet est une chaine
 						}
-						j = ++i; // ++i icar il faut passer l'espace avant y
+						j = ++i; // ++i car il faut passer l'espace avant y
 						for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
 							nb_aretes[i-j] = ligne[i];
 						}
@@ -77,6 +77,7 @@ int main(int argc, char *argv[]) {
 				fclose(fichier);		// On ferme le fichier
 				printf("\n# Fin de la lecture du fichier");
 				printf("\n########################################\n");
+				format_html_aretes(nom_fichier);
 			}
 			else {						// Echec de l'ouverture du fichier
 				printf("Impossible d'ouvrir le fichier %s\n", nom_fichier);
@@ -88,8 +89,6 @@ int main(int argc, char *argv[]) {
 		/* CODE */
 
 		if (ok != 0) {
-			format_html_aretes(nom_fichier);
-
 			printf("\n\n\n\n########################################");
 			printf("\n# %s", nom_fichier);
 			printf("\n########################################");
@@ -99,7 +98,7 @@ int main(int argc, char *argv[]) {
 			printf("\n\t[2] Colorier avec le deuxième algorithme (sommets triés par ordre)");
 			printf("\n\t[3] Colorier avec le troisième algorithme (sommets de la clique en premier)");
 			printf("\n\t[4] Voir la matrice des arêtes");
-			printf("\n\t[5] Calculer la taille de la clique maximum (et nombre chromatique)");
+			printf("\n\t[5] Calculer la taille de la clique maximum (nombre chromatique)");
 			printf("\n\t[9] Lire un autre graphe");
 			printf("\n\t[10] Quittez le programme\n");
 			ok = scanf("%d", &choix);
@@ -111,34 +110,53 @@ int main(int argc, char *argv[]) {
 				case 0:
 					printf("\n########################################");
 					printf("\n# EXECUTION ET COMPARAISON DES TROIS ALGOS");
-					printf("\n########################################\n");
+					printf("\n########################################\n\n");
 					int meilleur_algo;
 					int comparaison[3];
-					printf("\nPremier algorithme en cours de coloriage...\n");
+					printf("  Premier algorithme en cours de coloriage...\n");
+						liberer_couleurs();
 						initialiser_couleurs();
 						premier_algorithme();
-						printf("# %d couleurs\n\n", NOMBRE_DE_COULEURS);
+						printf("    %d couleurs\n\n", NOMBRE_DE_COULEURS);
 						comparaison[0] = NOMBRE_DE_COULEURS;
 						meilleur_algo = 1;
-					printf("Deuxième algorithme en cours de coloriage...\n");
+					printf("  Deuxième algorithme en cours de coloriage...\n");
+						liberer_couleurs();
 						initialiser_couleurs();
 						deuxieme_algorithme();
-						printf("# %d couleurs\n\n", NOMBRE_DE_COULEURS);
+						printf("    %d couleurs\n\n", NOMBRE_DE_COULEURS);
 						comparaison[1] = NOMBRE_DE_COULEURS;
 						if (comparaison[1] < comparaison[0]) meilleur_algo = 2;
-					printf("Troisième algorithme en cours de coloriage...\n");
+					printf("  Troisième algorithme en cours de coloriage...\n");
+						liberer_couleurs();
 						initialiser_couleurs();
 						troisieme_algorithme();
-						printf("# %d couleurs\n\n", NOMBRE_DE_COULEURS);
+						printf("    %d couleurs\n\n", NOMBRE_DE_COULEURS);
 						comparaison[2] = NOMBRE_DE_COULEURS;
 						if (comparaison[2] < comparaison[meilleur_algo-1]) meilleur_algo = 3;
-					printf("Meilleur algorithme : %d\n", meilleur_algo);
+					printf("  -> Meilleur algorithme : %d\n", meilleur_algo);
+						liberer_couleurs();
+						initialiser_couleurs();
+						switch (meilleur_algo) { // ré-execution du meilleur algo avant que le xxx_out.txt soit créé
+							case 1:
+								premier_algorithme();
+								break;
+							case 2:
+								deuxieme_algorithme();
+								break;
+							case 3:
+								troisieme_algorithme();
+								break;
+							default:
+								break;
+						}
 					break;
 				case 1:
 					printf("\n########################################");
 					printf("\n# COLORIAGE AVEC LE PREMIER ALGORITHME");
 					printf("\n# APPROCHE NAIVE");
 					printf("\n########################################\n");
+					liberer_couleurs();
 					initialiser_couleurs();
 					premier_algorithme();
 					printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
@@ -149,6 +167,7 @@ int main(int argc, char *argv[]) {
 					printf("\n# COLORIAGE AVEC LE DEUXIEME ALGORITHME");
 					printf("\n# SOMMETS COLORIES PAR ORDRE CROISSANT");
 					printf("\n########################################\n");
+					liberer_couleurs();
 					initialiser_couleurs();
 					deuxieme_algorithme();
 					printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
@@ -159,6 +178,7 @@ int main(int argc, char *argv[]) {
 					printf("\n# COLORIAGE AVEC LE TROISIEME ALGORITHME");
 					printf("\n# INITIÉ PAR LA CLIQUE MAXIMALE");
 					printf("\n########################################\n");
+					liberer_couleurs();
 					initialiser_couleurs();
 					troisieme_algorithme();
 					printf("\nNombre de couleurs utilisées : %d", compter_couleurs());
@@ -175,19 +195,27 @@ int main(int argc, char *argv[]) {
 					printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2());
 					break;
 				case 9:
-					liberer_aretes();
-					liberer_couleurs();
-					// free(nom_fichier);
 				default:
 					break;
 			}
 			
 			if (choix == 0 || choix == 1 || choix == 2 || choix == 3) {
-				printf("\nENREGISTRE DANS FICHER");
+				char sans_extension[strlen(nom_fichier)];
+				int copier = 0;
+				for (int i = strlen(nom_fichier)-1; i >= 0; --i) {
+					sans_extension[i] = (copier == 1) ? nom_fichier[i] : '\0';
+					if (nom_fichier[i] == '.') copier = 1;
+				}
+				
+				printf("\n# Les couleurs ont été enregistrées dans le fichier %s_out.txt", sans_extension);
 				format_standard_couleurs(nom_fichier);
 			}
 		} // fin if ok == 0
 	}
+
+	liberer_aretes();
+	liberer_couleurs();
+	// free(nom_fichier);
 
 	return EXIT_SUCCESS;
 }

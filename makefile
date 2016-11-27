@@ -13,18 +13,17 @@ main.out: main.c fonctions.c structures/aretes_matrice.c structures/couleurs_$(S
 	@echo "# Compilation de $^"
 	gcc -o main.out $^ $(CFLAGS) $(OFLAGS)
 	
-
-launch2: main.out test2.txt
-	@echo "# Execution de $^"
-	./$^
-	
-launch: main.out test.txt
+launch: main.out
 	@echo "# Execution de $^"
 	./$^
 
-launch-time: main.out test2.txt
-	@echo "# Execution de $^"
+launch-time: main.out
+	@echo "# Mesure temporelle de l'execution de $^"
 	time ./$^
+
+valgrind: main.out
+	@echo "# Vérification valgrind de l'execution de $^"
+	valgrind ./$^ --track-origins=yes
 
 
 clean:
