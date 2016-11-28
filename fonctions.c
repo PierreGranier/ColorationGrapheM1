@@ -190,7 +190,7 @@ void deuxieme_algorithme() {
 // tenter avec un algo qui part du sommet qui a le plus grand ordre et qui apartient à la plus grande clique
 void troisieme_algorithme() {
 	int sommets_clique_max[NOMBRE_DE_SOMMETS];
-	int clique_max = clique_maximum(sommets_clique_max);
+	int clique_max = clique_maximum2(sommets_clique_max);
 	
 	// Colorier les sommets de la cliques ordonnés par leur ordre décroisant
 	int sommets_tries[clique_max];

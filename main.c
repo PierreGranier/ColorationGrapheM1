@@ -18,7 +18,11 @@ int main(int argc, char *argv[]) {
 	while (choix != 10) {
 
 		/* LECTURE DU FICHIER */
-		
+
+		if (NOMBRE_DE_SOMMETS > 0) {
+			liberer_aretes();
+		}
+
 		if (choix == -1 || choix == 9) {
 			if (ok == 2) {
 				strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
@@ -193,7 +197,7 @@ int main(int argc, char *argv[]) {
 					puts("");
 					// int res[NOMBRE_DE_SOMMETS];
 					// printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum(res));
-					printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2());
+					// printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2(res));
 					break;
 				case 9:
 					puts("");

@@ -49,6 +49,8 @@ void ajouter_arete(int indice1, int indice2) {
  * Affiche la matrice, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
  */
 void afficher_aretes(int pourcentage_visible) {
+	pourcentage_visible = pourcentage_visible % 100;
+
 	printf("\n\n########################################");
 	printf("\n# MATRICE ARETES\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_SOMMETS, NOMBRE_DE_SOMMETS, pourcentage_visible);
 	printf("\n########################################\n\n");
@@ -293,18 +295,9 @@ int clique_maximum(int* res) {
 	return max_clique;
 }
 
-int ordre_max() {
-	int max = 0;
-	for(int i=0; i<NOMBRE_DE_SOMMETS; ++i) {
-		if(ordre_du_sommet(i) > max) {
-			max = ordre_du_sommet(i);
-		}
-	}
-	return max;
-}
-
-int clique_maximum2() {
+int clique_maximum2(int* res) {
 	int max_clique = 0;
+	int voisins_de_max_clique[ordre_max()]; // tableau de sommets tous reliés entre eux
 
 	for(int i= 0; i<NOMBRE_DE_SOMMETS; ++i) {
 		int* tab_clique;
@@ -334,9 +327,27 @@ int clique_maximum2() {
 			}
 		}
 		if(nb_clique > max_clique) {
+			for (int i = 0; i < nb_clique; ++i) {
+				voisins_de_max_clique[i] = tab_clique[i];
+			}
 			max_clique = nb_clique;
 		}
 		free(tab_clique);
 	}
-return max_clique;
+
+	for (int i = 0; i < max_clique; ++i) {
+		res[i] = voisins_de_max_clique[i];
+	}
+
+	return max_clique;
+}
+
+int ordre_max() {
+	int max = 0;
+	for(int i=0; i<NOMBRE_DE_SOMMETS; ++i) {
+		if(ordre_du_sommet(i) > max) {
+			max = ordre_du_sommet(i);
+		}
+	}
+	return max;
 }

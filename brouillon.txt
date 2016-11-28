@@ -1,11 +1,5 @@
-// TODO
-timers à mettre dans le main.c
 
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
-
-// autre technique, plus opti ? onsépa, fotester
-// pour chaque sommet i, chercher parmi ses voisins la plus petite couleur disponible (non utilisée) pour i et l'attribuer directement au sommet i
-// pour chaque sommet j, si il est voisin de i et qu'il n'a pas de couleur on lui attribut la plus petite couleur dispo pour j
 
 // à mettre dans l'intro du compte rendu, en dessous de l'explication du sujet donnée par le prof :
 n <= c <= d + 1
