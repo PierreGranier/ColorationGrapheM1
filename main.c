@@ -19,11 +19,12 @@ int main(int argc, char *argv[]) {
 
 		/* LECTURE DU FICHIER */
 
-		if (NOMBRE_DE_SOMMETS > 0) {
-			liberer_aretes();
-		}
-
 		if (choix == -1 || choix == 9) {
+
+			if (NOMBRE_DE_SOMMETS > 0) {
+				liberer_aretes();
+			}
+			
 			if (ok == 2) {
 				strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
 				ok = 1;
@@ -90,6 +91,8 @@ int main(int argc, char *argv[]) {
 		}
 
 		/* CODE */
+
+		int pour_clique[NOMBRE_DE_SOMMETS];
 
 		if (ok != 0) {
 			printf("\n\n\n\n########################################");
@@ -194,10 +197,9 @@ int main(int argc, char *argv[]) {
 					afficher_aretes(pourcentage);
 					break;
 				case 5:
-					puts("");
-					// int res[NOMBRE_DE_SOMMETS];
-					// printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum(res));
-					// printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2(res));
+					// http://stackoverflow.com/questions/20654191/c-stack-memory-goto-and-jump-into-scope-of-identifier-with-variably-modified
+					printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum(pour_clique));
+					printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2(pour_clique));
 					break;
 				case 9:
 					puts("");

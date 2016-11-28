@@ -187,9 +187,12 @@ void deuxieme_algorithme() {
 	}
 }
 
-// tenter avec un algo qui part du sommet qui a le plus grand ordre et qui apartient à la plus grande clique
+/*
+ * Coloration des sommets de la clique maximale en priorité
+ */
 void troisieme_algorithme() {
 	int sommets_clique_max[NOMBRE_DE_SOMMETS];
+	// int clique_max = clique_maximum(sommets_clique_max);
 	int clique_max = clique_maximum2(sommets_clique_max);
 	
 	// Colorier les sommets de la cliques ordonnés par leur ordre décroisant
@@ -201,7 +204,7 @@ void troisieme_algorithme() {
 		ordres_sommets[i] = ordre_du_sommet(sommets_clique_max[i]);
 	}
 	
-	for (int i = clique_max - 1; i > 0; --i) {
+	/*for (int i = clique_max - 1; i > 0; --i) {
 		for (int j = 0; j < i; ++j) {
 			if (ordres_sommets[j+1] > ordres_sommets[j]) {
 				// Echange des deux entiers dans le tableau des ordres
@@ -214,9 +217,10 @@ void troisieme_algorithme() {
 				sommets_tries[j+1] = tmp;
 			}
 		}
-	}
+	}*/
 
 	for (int i = 0; i < clique_max; ++i) {
+		printf("%d, ", ordres_sommets[i]);
 		associer_couleur(sommets_tries[i], chercher_premiere_couleur(sommets_tries[i]));
 	}	
 
@@ -227,3 +231,22 @@ void troisieme_algorithme() {
 		}
 	}
 }
+
+/*
+
+test2.txt
+clique1		triés		73
+			non triés	71
+clique2		triés		73
+			non triés	74
+
+r1000.1c.col
+clique 1	triés		139
+			non triés	136
+clique2		triés		139
+			non triés	140
+
+Vérifier à la fin de la clique que les sommets du tableau sont bien tous liés entre eux
+double for
+	[i][j] != '1' => return 0
+*/

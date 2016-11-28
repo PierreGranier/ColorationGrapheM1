@@ -245,7 +245,6 @@ int ordre_du_sommet(int indice) {
  */
 int clique_maximum(int* res) {
 	int max_clique = 0; // nombre de sommets dans la max clique
-	int voisins_de_max_clique[NOMBRE_DE_SOMMETS]; // tableau de sommets tous reliés entre eux
 
 	// Recherche de toutes les cliques en partant de chaque sommet du graphe
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
@@ -281,15 +280,11 @@ int clique_maximum(int* res) {
 			}
 			if (nb_voisins_de_clique > max_clique) {
 				for (int i = 0; i < nb_voisins_de_clique; ++i) {
-					voisins_de_max_clique[i] = voisins_de_clique[i];
+					res[i] = voisins_de_clique[i];
 				}
 				max_clique = nb_voisins_de_clique;
 			}
 		}
-	}
-
-	for (int i = 0; i < max_clique; ++i) {
-		res[i] = voisins_de_max_clique[i];
 	}
 
 	return max_clique;
@@ -297,7 +292,6 @@ int clique_maximum(int* res) {
 
 int clique_maximum2(int* res) {
 	int max_clique = 0;
-	int voisins_de_max_clique[ordre_max()]; // tableau de sommets tous reliés entre eux
 
 	for(int i= 0; i<NOMBRE_DE_SOMMETS; ++i) {
 		int* tab_clique;
@@ -328,15 +322,11 @@ int clique_maximum2(int* res) {
 		}
 		if(nb_clique > max_clique) {
 			for (int i = 0; i < nb_clique; ++i) {
-				voisins_de_max_clique[i] = tab_clique[i];
+				res[i] = tab_clique[i];
 			}
 			max_clique = nb_clique;
 		}
 		free(tab_clique);
-	}
-
-	for (int i = 0; i < max_clique; ++i) {
-		res[i] = voisins_de_max_clique[i];
 	}
 
 	return max_clique;

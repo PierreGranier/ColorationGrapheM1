@@ -30,3 +30,7 @@ Nous avons mis en place trois algorithmes de coloration :
 ### Graphes de test
 
 [Lien pour télécharger des graphes de test](http://www.info.univ-angers.fr/pub/porumbel/graphs/)
+
+### Autres liens
+
+[Allocation dynamique](https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/chapitre3.html)
