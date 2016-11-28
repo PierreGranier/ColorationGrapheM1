@@ -18,7 +18,7 @@ void format_standard_aretes(char* nom_fichier);
 void format_html_aretes(char* nom_fichier);
 void ajouter_arete(int indice1, int indice2);
 int ordre_du_sommet(int indice);
-int clique_maximum();
+int clique_maximum(int* res);
 int clique_maximum2();
 int ordre_max();
 
@@ -37,7 +37,6 @@ int compter_couleurs();
 int chercher_premiere_couleur(int indice_sommet);
 int est_entierement_colorie();
 int est_bien_colorie();
-int clique_maximum();
 void premier_algorithme();
 void premier_algorithme_bis();
 void deuxieme_algorithme();

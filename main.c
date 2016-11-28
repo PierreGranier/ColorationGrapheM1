@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
 				fclose(fichier);		// On ferme le fichier
 				printf("\n# Fin de la lecture du fichier");
 				printf("\n########################################\n");
-				format_html_aretes(nom_fichier);
+				// format_html_aretes(nom_fichier);
 			}
 			else {						// Echec de l'ouverture du fichier
 				printf("\n# Impossible d'ouvrir le fichier %s\n", nom_fichier);
@@ -190,10 +190,14 @@ int main(int argc, char *argv[]) {
 					afficher_aretes(pourcentage);
 					break;
 				case 5:
-					printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum());
+					puts("");
+					// int res[NOMBRE_DE_SOMMETS];
+					// printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum(res));
 					printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2());
 					break;
 				case 9:
+					puts("");
+					break;
 				default:
 					break;
 			}

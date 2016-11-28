@@ -185,11 +185,45 @@ void deuxieme_algorithme() {
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		associer_couleur(sommets_tries[i], chercher_premiere_couleur(sommets_tries[i]));
 	}
-
-	// ERREUR c'est pas bien colorié wtf
 }
 
 // tenter avec un algo qui part du sommet qui a le plus grand ordre et qui apartient à la plus grande clique
 void troisieme_algorithme() {
+	int sommets_clique_max[NOMBRE_DE_SOMMETS];
+	int clique_max = clique_maximum(sommets_clique_max);
+	
+	// Colorier les sommets de la cliques ordonnés par leur ordre décroisant
+	int sommets_tries[clique_max];
+	int ordres_sommets[clique_max];
 
+	for (int i = 0; i < clique_max; ++i) {
+		sommets_tries[i] = sommets_clique_max[i];
+		ordres_sommets[i] = ordre_du_sommet(sommets_clique_max[i]);
+	}
+	
+	for (int i = clique_max - 1; i > 0; --i) {
+		for (int j = 0; j < i; ++j) {
+			if (ordres_sommets[j+1] > ordres_sommets[j]) {
+				// Echange des deux entiers dans le tableau des ordres
+				int tmp = ordres_sommets[j];
+				ordres_sommets[j] = ordres_sommets[j+1];
+				ordres_sommets[j+1] = tmp;
+				// Echange des deux entiers dans le tableau des sommets
+				tmp = sommets_tries[j];
+				sommets_tries[j] = sommets_tries[j+1];
+				sommets_tries[j+1] = tmp;
+			}
+		}
+	}
+
+	for (int i = 0; i < clique_max; ++i) {
+		associer_couleur(sommets_tries[i], chercher_premiere_couleur(sommets_tries[i]));
+	}	
+
+	// Colorier les autres sommets
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		if (couleur_du_sommet(i) == -1) {
+			associer_couleur(i, chercher_premiere_couleur(i));
+		}
+	}
 }
