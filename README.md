@@ -22,7 +22,8 @@ Nettoyer le projet :
 
 ### Travail effectué
 
-Nous avons mis en place trois algorithmes de coloration :* Approche naïve
+Nous avons mis en place trois algorithmes de coloration :
+* Approche naïve
 * Coloration des sommets trié par ordre décroissant de leur ordre
 * Coloration des sommets de la maximum clique en priorité
 
