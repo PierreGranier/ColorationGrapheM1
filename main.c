@@ -7,27 +7,26 @@
 #define TAILLE_MAX 90
 
 int main(int argc, char *argv[]) {
+	char nom_fichier[TAILLE_MAX];
 	int ok = 1;
+
+	if (argc == 2) { // argv[0] = le nom du fichier exécuté
+		ok = 2;
+	}
 
 	int choix = -1;
 	while (choix != 10) {
-		char nom_fichier[TAILLE_MAX];
 
+		/* LECTURE DU FICHIER */
+		
 		if (choix == -1 || choix == 9) {
-			/* LECTURE DU FICHIER */
-
-			/*char* nom_fichier;
-
-			if (argc == 1) { // argv[0] = le nom du fichier exécuté
-				printf("Donner en paramètre le nom du fichier à exploiter\n");
-				return EXIT_SUCCESS;
-			} else {
-				nom_fichier = (char*)malloc(strlen(argv[1]) * sizeof(char*)); // redimensionnement du tableau de char
+			if (ok == 2) {
 				strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
-			}*/
-
-			printf("\nNom du fichier contenant le graphe : ");
-			ok = scanf("%s", nom_fichier);
+				ok = 1;
+			} else {
+				printf("\nNom du fichier contenant le graphe : ");
+				ok = scanf("%s", nom_fichier);
+			}
 
 			FILE* fichier = NULL;
 			fichier = fopen(nom_fichier, "r");
@@ -80,7 +79,7 @@ int main(int argc, char *argv[]) {
 				format_html_aretes(nom_fichier);
 			}
 			else {						// Echec de l'ouverture du fichier
-				printf("Impossible d'ouvrir le fichier %s\n", nom_fichier);
+				printf("\n# Impossible d'ouvrir le fichier %s\n", nom_fichier);
 				// return EXIT_SUCCESS;
 				ok = 0;
 			}
