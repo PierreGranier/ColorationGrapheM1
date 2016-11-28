@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
 			printf("\nChoisissez une action à effectuer :");
 			printf("\n\t[0] Comparaison des algorithmes de coloriage");
 			printf("\n\t[1] Colorier avec le premier algorithme (approche naïve)");
-			printf("\n\t[2] Colorier avec le deuxième algorithme (sommets triés par ordre)");
+			printf("\n\t[2] Colorier avec le deuxième algorithme (sommets triés par leur ordre)");
 			printf("\n\t[3] Colorier avec le troisième algorithme (sommets de la clique en premier)");
 			printf("\n\t[4] Voir la matrice des arêtes");
 			printf("\n\t[5] Calculer la taille de la clique maximum (nombre chromatique)");
@@ -165,7 +165,7 @@ int main(int argc, char *argv[]) {
 				case 2:
 					printf("\n########################################");
 					printf("\n# COLORIAGE AVEC LE DEUXIEME ALGORITHME");
-					printf("\n# SOMMETS COLORIES PAR ORDRE CROISSANT");
+					printf("\n# SOMMETS COLORIES PAR ORDRE DÉCROISSANT");
 					printf("\n########################################\n");
 					liberer_couleurs();
 					initialiser_couleurs();

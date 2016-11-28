@@ -37,8 +37,6 @@ int est_bien_colorie() {
 			if (MATRICE_ARETES[i][j] == '1' && couleur_du_sommet(i) == couleur_du_sommet(j)) {
 				// printf("\nConflit entre (%d, %d)", i, j);
 				return 0;
-			} else {
-				// printf("(%d, %d) ", i, j);
 			}
 		}
 	}
@@ -53,7 +51,7 @@ int chercher_premiere_couleur(int indice_sommet) {
 	for(i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		if(MATRICE_ARETES[indice_sommet][i] == '1' && couleur_min == couleur_du_sommet(i)) {
 			++couleur_min;
-			i=0;		
+			i=-1;
 		}
 	}
 	return couleur_min;
@@ -141,17 +139,17 @@ void premier_algorithme_bis() {
 }
 
 /*
- * Sommets coloriés dans l'ordre croissant de leur ordre (ceux qui ont le plus de voisins sont coloriés en premier)
+ * Sommets coloriés dans l'ordre décroissant de leur ordre (ceux qui ont le plus de voisins sont coloriés en premier)
  */
 void deuxieme_algorithme() {
 	/*while (est_entierement_colorie() == 0) {
 		int sommet_max = 0;
-		int odre_sommet_max = 0;
+		int ordre_sommet_max = 0;
 		// Pour chaque sommet (non colorié), si son ordre > ordre_sommet_max, on le retient comme étant le sommet_max
 		for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
-			if (couleur_du_sommet(i) == -1 && ordre_du_sommet(i) > odre_sommet_max) {
+			if (couleur_du_sommet(i) == -1 && ordre_du_sommet(i) > ordre_sommet_max) {
 				sommet_max = i;
-				odre_sommet_max = ordre_du_sommet(i);
+				ordre_sommet_max = ordre_du_sommet(i);
 			}
 		}
 		// Associer au sommet max la plus petite couleur disponible (non occupée par ses voisins)
@@ -166,21 +164,20 @@ void deuxieme_algorithme() {
 		sommets_tries[i] = i;
 		ordres_sommets[i] = ordre_du_sommet(i);
 	}
-	
+
 	// Tri à bulle
-	for (int i = NOMBRE_DE_SOMMETS-1; i >= 0; --i) {
-		if (ordres_sommets[i] < ordres_sommets[i+1]) {
-			// Echange des deux entiers dans le tableau des ordres
-			int tmp = ordres_sommets[i];
-			ordres_sommets[i] = ordres_sommets[i+1];
-			ordres_sommets[i+1] = tmp;
-			// Echange des deux entiers dans le tableau des sommets
-			tmp = sommets_tries[i];
-			sommets_tries[i] = sommets_tries[i+1];
-			sommets_tries[i+1] = tmp;
-			// Retour en avant
-			++i;
-			if (i < NOMBRE_DE_SOMMETS-1) ++i;
+	for (int i = NOMBRE_DE_SOMMETS - 1; i > 0; --i) {
+		for (int j = 0; j < i; ++j) {
+			if (ordres_sommets[j+1] > ordres_sommets[j]) {
+				// Echange des deux entiers dans le tableau des ordres
+				int tmp = ordres_sommets[j];
+				ordres_sommets[j] = ordres_sommets[j+1];
+				ordres_sommets[j+1] = tmp;
+				// Echange des deux entiers dans le tableau des sommets
+				tmp = sommets_tries[j];
+				sommets_tries[j] = sommets_tries[j+1];
+				sommets_tries[j+1] = tmp;
+			}
 		}
 	}
 

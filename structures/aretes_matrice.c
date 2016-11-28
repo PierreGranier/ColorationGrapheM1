@@ -89,19 +89,19 @@ void format_html_aretes(char* nom_fichier) {
 		coords_aretes[3][i] = 0;
 	}
 
-	/*int** coords_sommets = (int**)malloc(2 * sizeof(int*)); // 2xN
-	for (int i = 0; i < 2; ++i) { // dimensionne chaque ligne
-		coords_sommets[i] = (int*)calloc(NOMBRE_DE_SOMMETS, sizeof(int));
-	}
-	int** coords_aretes = (int**)malloc(4 * sizeof(int*)); // 4xN
-	for (int i = 0; i < 4; ++i) { // dimensionne chaque ligne
-		coords_aretes[i] = (int*)calloc(NOMBRE_D_ARETES, sizeof(int));
-	}*/
-
-	int pas = 400 / NOMBRE_DE_SOMMETS;
-	int x = 0, y = 0, indice_sommet = 0, indice_arete = 0;
+	// int** coords_sommets = (int**)malloc(2 * sizeof(int*)); // 2xN
+	// for (int i = 0; i < 2; ++i) { // dimensionne chaque ligne
+	// 	coords_sommets[i] = (int*)calloc(NOMBRE_DE_SOMMETS, sizeof(int));
+	// }
+	// int** coords_aretes = (int**)malloc(4 * sizeof(int*)); // 4xN
+	// for (int i = 0; i < 4; ++i) { // dimensionne chaque ligne
+	// 	coords_aretes[i] = (int*)calloc(NOMBRE_D_ARETES, sizeof(int));
+	// }
 
 	// Répartition des coordonnées sur une spirale vers le centre
+	int pas = 400 / NOMBRE_DE_SOMMETS;
+	int x = 0, y = 0, indice_sommet = 0, indice_arete = 0;
+	
 	while (x+pas <= 100 && indice_sommet < NOMBRE_DE_SOMMETS) {
 		coords_sommets[0][indice_sommet] = x;
 		coords_sommets[1][indice_sommet++] = y;
@@ -137,6 +137,7 @@ void format_html_aretes(char* nom_fichier) {
 	// }
 	
 	// Ajout des coordonnées des arêtes sur les coordonnées des sommets frêres
+	int pour_le_bug = 0;
 	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
 		for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
 			if (MATRICE_ARETES[i][j] == '1') {
@@ -155,6 +156,7 @@ void format_html_aretes(char* nom_fichier) {
 				// printf("\nLongueur = %d", longueur);
 				// printf("\nAngle = %d", angle);
 				// printf(" => x[%d] y[%d] width[%d] rotate[%d]\n", coords_aretes[0][indice_arete] , coords_aretes[1][indice_arete] , coords_aretes[2][indice_arete], coords_aretes[3][indice_arete]);
+				if (indice_arete == 0) { pour_le_bug = coords_sommets[0][i]; }
 				++indice_arete;
 			}
 		}
@@ -204,9 +206,10 @@ void format_html_aretes(char* nom_fichier) {
 		// 	}
 		// 	printf("\n");
 		// }
-
-		for (int i = 0; i < NOMBRE_D_ARETES; ++i) {
-			fprintf(fichier, "<arete style=\"left: %dpx; top: %dpx; width: %dpx; transform: rotate(%ddeg)\"></arete>", coords_aretes[0][i], coords_aretes[1][i], coords_aretes[2][i], coords_aretes[3][i]);
+		
+		coords_aretes[0][0] = pour_le_bug; // ...
+		for (int i = 0; i < 5; ++i) {
+			fprintf(fichier, "<arete style=\"left: %dpx; top: %dpx; width: %dpx; transform: rotate(%ddeg)\">.</arete>", coords_aretes[0][i], coords_aretes[1][i], coords_aretes[2][i], coords_aretes[3][i]);
 		}
 
 		fprintf(fichier, "</graphe>");
@@ -274,6 +277,8 @@ int clique_maximum() {
 		}
 	}
 	return max_clique;
+
+	// retourner le tableau de la clique et la taille de ce tableau dans un tableau
 }
 
 int ordre_max() {

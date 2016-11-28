@@ -1,5 +1,4 @@
 // TODO
-algo deuxieme ne colorie pas bien : quand on fait [5] cliques puis [2) algo deux, erreur seg.
 timers à mettre dans le main.c
 
 // en trouvant la clique maximale d'un graphe on peut trouver son nombre chromatique
