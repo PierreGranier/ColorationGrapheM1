@@ -341,3 +341,68 @@ int ordre_max() {
 	}
 	return max;
 }
+
+void comparer_verifier_cliques() {
+	int sommets_clique_max[NOMBRE_DE_SOMMETS];
+	int clique_max;
+	
+	clique_max = clique_maximum(sommets_clique_max);
+	printf("\n=============\nClique Tibo : %d\n-------------", clique_max);
+
+	printf("\n# Vérification que les sommets de cette clique sont bien tous liés entre eux :\n[Début] ");
+	for (int i = 0; i < clique_max; ++i) {
+		printf("%d ", sommets_clique_max[i]);
+		for (int j = 0; j < clique_max; ++j) {
+			if (MATRICE_ARETES[sommets_clique_max[i]][sommets_clique_max[j]] != '1' && sommets_clique_max[i] != sommets_clique_max[j]) {
+				printf("[Problème] ");
+			}
+		}
+	}
+	printf("[Fin]\n");
+
+	printf("# Liste des autres sommets pouvant faire partie de cette clique :\n[Début] ");
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		int peut_faire_partie = 1;
+		int j = 0;
+		while (j < clique_max && peut_faire_partie == 1) {
+			if ( (MATRICE_ARETES[i][sommets_clique_max[j]] != '1' && i != sommets_clique_max[j]) || i == sommets_clique_max[j]) {
+				peut_faire_partie = 0;
+			}
+			++j;
+		}
+		if (peut_faire_partie == 1) {
+			printf("%d ", i);
+		}
+	}
+	printf("[Fin]\n");
+
+	clique_max = clique_maximum2(sommets_clique_max);
+	printf("\n=============\nClique Bob %d\n-------------\n", clique_max);
+
+	printf("# Vérification que les sommets de cette clique sont bien tous liés entre eux :\n[Début] ");
+	for (int i = 0; i < clique_max; ++i) {
+		printf("%d ", sommets_clique_max[i]);
+		for (int j = 0; j < clique_max; ++j) {
+			if (MATRICE_ARETES[sommets_clique_max[i]][sommets_clique_max[j]] != '1' && sommets_clique_max[i] != sommets_clique_max[j]) {
+				printf("[Problème] ");
+			}
+		}
+	}
+	printf("[Fin]\n");
+
+	printf("# Liste des autres sommets pouvant faire partie de cette clique :\n[Début] ");
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		int peut_faire_partie = 1;
+		int j = 0;
+		while (j < clique_max && peut_faire_partie == 1) {
+			if ( (MATRICE_ARETES[i][sommets_clique_max[j]] != '1' && i != sommets_clique_max[j]) || i == sommets_clique_max[j]) {
+				peut_faire_partie = 0;
+			}
+			++j;
+		}
+		if (peut_faire_partie == 1) {
+			printf("%d ", i);
+		}
+	}
+	printf("[Fin]\n");
+}

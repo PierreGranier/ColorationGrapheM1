@@ -194,7 +194,7 @@ void troisieme_algorithme() {
 	int sommets_clique_max[NOMBRE_DE_SOMMETS];
 	// int clique_max = clique_maximum(sommets_clique_max);
 	int clique_max = clique_maximum2(sommets_clique_max);
-	
+
 	// Colorier les sommets de la cliques ordonnés par leur ordre décroisant
 	int sommets_tries[clique_max];
 	int ordres_sommets[clique_max];
@@ -220,7 +220,6 @@ void troisieme_algorithme() {
 	}*/
 
 	for (int i = 0; i < clique_max; ++i) {
-		printf("%d, ", ordres_sommets[i]);
 		associer_couleur(sommets_tries[i], chercher_premiere_couleur(sommets_tries[i]));
 	}	
 
@@ -249,4 +248,5 @@ clique2		triés		139
 Vérifier à la fin de la clique que les sommets du tableau sont bien tous liés entre eux
 double for
 	[i][j] != '1' => return 0
+essayer de tourner avec la mtrice de couleurs pour comparer les temps d'execution
 */

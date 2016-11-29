@@ -21,6 +21,7 @@ int ordre_du_sommet(int indice);
 int clique_maximum(int* res);
 int clique_maximum2(int* res);
 int ordre_max();
+void comparer_verifier_cliques();
 
 void initialiser_couleurs();
 void liberer_couleurs();

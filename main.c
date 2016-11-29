@@ -198,8 +198,9 @@ int main(int argc, char *argv[]) {
 					break;
 				case 5:
 					// http://stackoverflow.com/questions/20654191/c-stack-memory-goto-and-jump-into-scope-of-identifier-with-variably-modified
-					printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum(pour_clique));
-					printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2(pour_clique));
+					// printf("\nTaille de la clique maximum (nombre chromatique) TIBO : %d\n", clique_maximum(pour_clique));
+					// printf("\nTaille de la clique maximum (nombre chromatique) BOB  : %d\n", clique_maximum2(pour_clique));
+					comparer_verifier_cliques();
 					break;
 				case 9:
 					puts("");
