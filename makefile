@@ -27,4 +27,6 @@ valgrind: main.out
 
 
 clean:
-	rm *.out
+	rm -f *.out
+	rm -f graphes/*.html
+	rm -f graphes/*_out.txt

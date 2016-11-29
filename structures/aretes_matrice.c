@@ -252,18 +252,20 @@ int clique_maximum(int* res) {
 		// Étant donné que l'ajout d'un sommet à la clique a une influence sur l'ajout ou pas des sommets suivant, il faut en omettre certains pour qu'ils ne bloquent pas la situation
 		// Donc boucle for supplémentaire pour trouver toutes les cliques possibles
 		// Ca sert à rien d'omettre les x premiers sommets s'il ne reste que y sommets à regarder, y étant inférieur à la max clique trouvée, car il sera imppossible avec y sommets de faire une clique plus grande que celle déjà enregistrée
-		// for (int omettre = 0; omettre < NOMBRE_DE_SOMMETS; ++omettre) {
-		for (int omettre = 0; omettre < (NOMBRE_DE_SOMMETS-max_clique); ++omettre) {
+		// for (int sommet_de_depart = 0; sommet_de_depart < NOMBRE_DE_SOMMETS; ++sommet_de_depart) {
+		for (int sommet_de_depart = 0; sommet_de_depart < (NOMBRE_DE_SOMMETS-max_clique); ++sommet_de_depart) {
 			// printf("\nRecherche d'une clique avec le sommet %d :\n", i);
 			int voisins_de_clique[NOMBRE_DE_SOMMETS];
 			int nb_voisins_de_clique = 0;
 			voisins_de_clique[nb_voisins_de_clique++] = i;
-			for (int j = omettre; j < NOMBRE_DE_SOMMETS; ++j) {
+			for (int j = sommet_de_depart; j < NOMBRE_DE_SOMMETS; ++j) {
+				// Si les sommets sont différents (il faut vérifier car le sommet i est déjà dans le tableau)
 				if (j != i) {
 					// printf("%d en lien avec : ", j);
 					// s'il y a une arête entre j et tous les sommets du tableau, ce sommet fait partie de la clique
 					int ajouter = 1;
 					int k = 0;
+					// Il faut que le sommet j soit en lien avec tous les sommets k du tableau de clique et que j soit différent de k pour l'ajouter au tableau de clique
 					while (k < nb_voisins_de_clique && ajouter == 1) {
 						if (MATRICE_ARETES[j][voisins_de_clique[k]] == '0' && j != voisins_de_clique[k]) {
 							ajouter = 0;
@@ -377,7 +379,7 @@ void comparer_verifier_cliques() {
 	printf("[Fin]\n");
 
 	clique_max = clique_maximum2(sommets_clique_max);
-	printf("\n=============\nClique Bob %d\n-------------\n", clique_max);
+	printf("\n=============\nClique Bob : %d\n-------------\n", clique_max);
 
 	printf("# Vérification que les sommets de cette clique sont bien tous liés entre eux :\n[Début] ");
 	for (int i = 0; i < clique_max; ++i) {
