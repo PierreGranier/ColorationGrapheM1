@@ -2,7 +2,7 @@
 
 ## GRANIER--RICHARD Pierre, ROPERCH Thibaut
 
-### Commandes
+### Commandes (Linux)
 
 Compiler :
 
