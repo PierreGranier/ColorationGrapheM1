@@ -5,4 +5,4 @@
 .vscode/*.json
 
 #graphes
-graphes/*
+#graphes/*

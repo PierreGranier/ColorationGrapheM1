@@ -10,6 +10,7 @@ char** MATRICE_ARETES;
 
 // FONCTIONS SUR LES STRUCTURES
 // implémentées dans les .c du dossier structures
+// https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/chapitre3.html
 
 void initialiser_aretes();
 void liberer_aretes();
@@ -20,6 +21,7 @@ void ajouter_arete(int indice1, int indice2);
 int ordre_du_sommet(int indice);
 int clique_maximum(int* res);
 int clique_maximum2(int* res);
+int clique_maximum3(int* res);
 int ordre_max();
 void comparer_verifier_cliques();
 

@@ -262,7 +262,7 @@ int clique_maximum(int* res) {
 				// Si les sommets sont différents (il faut vérifier car le sommet i est déjà dans le tableau)
 				if (j != i) {
 					// printf("%d en lien avec : ", j);
-					// s'il y a une arête entre j et tous les sommets du tableau, ce sommet fait partie de la clique
+					// S'il y a une arête entre j et tous les sommets du tableau, ce sommet fait partie de la clique
 					int ajouter = 1;
 					int k = 0;
 					// Il faut que le sommet j soit en lien avec tous les sommets k du tableau de clique et que j soit différent de k pour l'ajouter au tableau de clique
@@ -280,9 +280,12 @@ int clique_maximum(int* res) {
 					}
 				}
 			}
+			// Si c'est un record, l'enregistrer
 			if (nb_voisins_de_clique > max_clique) {
-				for (int i = 0; i < nb_voisins_de_clique; ++i) {
-					res[i] = voisins_de_clique[i];
+				if (res != NULL) {
+					for (int i = 0; i < nb_voisins_de_clique; ++i) {
+						res[i] = voisins_de_clique[i];
+					}
 				}
 				max_clique = nb_voisins_de_clique;
 			}
@@ -323,12 +326,71 @@ int clique_maximum2(int* res) {
 			}
 		}
 		if(nb_clique > max_clique) {
-			for (int i = 0; i < nb_clique; ++i) {
-				res[i] = tab_clique[i];
+			if (res != NULL) {
+				for (int i = 0; i < nb_clique; ++i) {
+					res[i] = tab_clique[i];
+				}
 			}
 			max_clique = nb_clique;
 		}
 		free(tab_clique);
+	}
+
+	return max_clique;
+}
+
+int clique_maximum3(int* res) {
+	int max_clique = 0; // nombre de sommets dans la max clique
+
+	// Recherche de toutes les cliques en partant de chaque sommet du graphe
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		// Recherche d'un sommet appartenant à la clique en les parcourant tous et en les ajoutant au tableau de clique s'ils sont aptes à en faire partie
+		// Étant donné que l'ajout d'un sommet à la clique a une influence sur l'ajout ou pas des sommets suivant, il faut en omettre certains pour qu'ils ne bloquent pas la situation
+		int sommet_de_depart = 0;
+		int rechercher_clique = 1;
+		while (rechercher_clique == 1 && sommet_de_depart < NOMBRE_DE_SOMMETS) {
+			// Arrêt de la recherche si tous les sommets de départ ont été épuisés
+			while (MATRICE_ARETES[i][sommet_de_depart] != '1') {
+				++sommet_de_depart;
+				if (sommet_de_depart == NOMBRE_DE_SOMMETS) {
+					rechercher_clique = 0;
+					break;
+				}
+			}
+			if (rechercher_clique == 1) {
+				int voisins_de_clique[NOMBRE_DE_SOMMETS];
+				int nb_voisins_de_clique = 0;
+				voisins_de_clique[nb_voisins_de_clique++] = i;
+				voisins_de_clique[nb_voisins_de_clique++] = sommet_de_depart;
+				for (int j = 0; j < NOMBRE_DE_SOMMETS; ++j) {
+					// S'il y a une arête entre j et tous les sommets du tableau, ce sommet fait partie de la clique
+					int ajouter = (j == i || j == sommet_de_depart) ? 0 : 1;
+					int k = 0;
+					// Il faut que le sommet j soit en lien avec tous les sommets k du tableau de clique et que j soit différent de k pour l'ajouter au tableau de clique
+					while (ajouter == 1 && k < nb_voisins_de_clique) {
+						if (MATRICE_ARETES[j][voisins_de_clique[k]] == '0' && j != voisins_de_clique[k]) {
+							ajouter = 0;
+						}
+						++k;
+					}
+					// printf("\n");
+					if (ajouter == 1) {
+						voisins_de_clique[nb_voisins_de_clique++] = j;
+						// printf("+ Le sommet %d\n", j);
+					}
+				}
+				// Si c'est un record, l'enregistrer
+				if (nb_voisins_de_clique > max_clique) {
+					if (res != NULL) {
+						for (int i = 0; i < nb_voisins_de_clique; ++i) {
+							res[i] = voisins_de_clique[i];
+						}
+					}
+					max_clique = nb_voisins_de_clique;
+				}
+			}
+			++sommet_de_depart;
+		} // fin while rechercher_clique == 1
 	}
 
 	return max_clique;
@@ -382,6 +444,36 @@ void comparer_verifier_cliques() {
 	printf("\n=============\nClique Bob : %d\n-------------\n", clique_max);
 
 	printf("# Vérification que les sommets de cette clique sont bien tous liés entre eux :\n[Début] ");
+	for (int i = 0; i < clique_max; ++i) {
+		printf("%d ", sommets_clique_max[i]);
+		for (int j = 0; j < clique_max; ++j) {
+			if (MATRICE_ARETES[sommets_clique_max[i]][sommets_clique_max[j]] != '1' && sommets_clique_max[i] != sommets_clique_max[j]) {
+				printf("[Problème] ");
+			}
+		}
+	}
+	printf("[Fin]\n");
+
+	printf("# Liste des autres sommets pouvant faire partie de cette clique :\n[Début] ");
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		int peut_faire_partie = 1;
+		int j = 0;
+		while (j < clique_max && peut_faire_partie == 1) {
+			if ( (MATRICE_ARETES[i][sommets_clique_max[j]] != '1' && i != sommets_clique_max[j]) || i == sommets_clique_max[j]) {
+				peut_faire_partie = 0;
+			}
+			++j;
+		}
+		if (peut_faire_partie == 1) {
+			printf("%d ", i);
+		}
+	}
+	printf("[Fin]\n");
+
+	clique_max = clique_maximum3(sommets_clique_max);
+	printf("\n=============\nClique Tibo2 : %d\n-------------", clique_max);
+
+	printf("\n# Vérification que les sommets de cette clique sont bien tous liés entre eux :\n[Début] ");
 	for (int i = 0; i < clique_max; ++i) {
 		printf("%d ", sommets_clique_max[i]);
 		for (int j = 0; j < clique_max; ++j) {

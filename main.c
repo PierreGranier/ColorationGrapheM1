@@ -92,8 +92,6 @@ int main(int argc, char *argv[]) {
 
 		/* CODE */
 
-		int pour_clique[NOMBRE_DE_SOMMETS];
-
 		if (ok != 0) {
 			printf("\n\n\n\n########################################");
 			printf("\n# %s", nom_fichier);
@@ -140,7 +138,7 @@ int main(int argc, char *argv[]) {
 						printf("    %d couleurs\n\n", NOMBRE_DE_COULEURS);
 						comparaison[2] = NOMBRE_DE_COULEURS;
 						if (comparaison[2] < comparaison[meilleur_algo-1]) meilleur_algo = 3;
-					printf("  -> Meilleur algorithme : %d\n", meilleur_algo);
+					printf("  -> Meilleur algorithme : %d\n\n  Ré-exécution du meilleur algorithme...\n", meilleur_algo);
 						liberer_couleurs();
 						initialiser_couleurs();
 						switch (meilleur_algo) { // ré-execution du meilleur algo avant que le xxx_out.txt soit créé
@@ -198,7 +196,26 @@ int main(int argc, char *argv[]) {
 					break;
 				case 5:
 					// http://stackoverflow.com/questions/20654191/c-stack-memory-goto-and-jump-into-scope-of-identifier-with-variably-modified
-					comparer_verifier_cliques();
+					printf("\n########################################");
+					printf("\n# RECHERCHE DE CLIQUE");
+					printf("\n########################################\n\n");
+					int clique_max;
+					printf("  Premier algorithme en cours de recherche...\n");
+						clique_max = clique_maximum(NULL);
+						printf("    %d sommets\n\n", clique_max);
+						comparaison[0] = clique_max;
+						meilleur_algo = 1;
+					printf("  Deuxième algorithme en cours de recherche...\n");
+						clique_max = clique_maximum2(NULL);
+						printf("    %d sommets\n\n", clique_max);
+						comparaison[1] = clique_max;
+						if (comparaison[1] > comparaison[0]) meilleur_algo = 2;
+					printf("  Troisième algorithme en cours de recherche...\n");
+						clique_max = clique_maximum3(NULL);
+						printf("    %d sommets\n\n", clique_max);
+						comparaison[2] = clique_max;
+						if (comparaison[2] > comparaison[meilleur_algo-1]) meilleur_algo = 3;
+					printf("  -> Meilleur algorithme : %d\n", meilleur_algo);
 					break;
 				case 9:
 					puts("");
@@ -215,7 +232,7 @@ int main(int argc, char *argv[]) {
 					if (nom_fichier[i] == '.') copier = 1;
 				}
 				
-				printf("\n# Les couleurs ont été enregistrées dans le fichier %s_out.txt", sans_extension);
+				printf("\n# Les couleurs des sommets ont été enregistrées dans le fichier %s_out.txt", sans_extension);
 				format_standard_couleurs(nom_fichier);
 			}
 		} // fin if ok == 0
