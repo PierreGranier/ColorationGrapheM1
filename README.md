@@ -22,7 +22,7 @@ Nettoyer le projet (supprime les exécutables) :
 
 Exemple d'utlisation des commandes :
 
-    make clean ; make ; ./main.out graphes/r1000.1c.col
+    make clean ; make ; ./main.out graphes/r1000.5.col
 
 ### Travail effectué
 
