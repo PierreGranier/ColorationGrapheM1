@@ -32,11 +32,12 @@ Nous avons mis en place trois algorithmes de coloration :
 * Coloration des sommets de la maximum clique en priorité
 
 Via le menu, il est possible d'executer ces algorithmes :
-* Ensemble : L'algorithme qui aura utilisé le moins de couleurs sera retenu et la coloration du graphe sera enregistrée dans un fichier de sortie
-* Individuellement : La coloration du graphe sera enregistrée dans un fichier de sortie
+* Ensemble - L'algorithme qui aura utilisé le moins de couleurs sera retenu et la coloration du graphe sera enregistrée dans un fichier de sortie
+* Individuellement - La coloration du graphe sera enregistrée dans un fichier de sortie
 
-*Notes : Le fichier de sortie contient sur une ligne le nombre de couleurs utilisées et sur une deuxième ligne la couleur de chaque sommet ordonnés selon leur nom par ordre croissant*
-*Le fichier sera nommé NomGraphe_out.txt et généré dans le même dossier que le fichier NomGraphe.col donné au programme*
+*Notes :*
+*Le fichier de sortie contient sur une ligne le nombre de couleurs utilisées et sur une deuxième ligne la couleur de chaque sommet ordonnés selon leur nom par ordre croissant.*
+*Le fichier sera nommé NomGraphe_out.txt et généré dans le même dossier que le fichier NomGraphe.col donné au programme.*
 
 ### Graphes de test
 
