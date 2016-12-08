@@ -396,6 +396,52 @@ int clique_maximum3(int* res) {
 	return max_clique;
 }
 
+void calculer_clique(int* sommets_clique_max, int* taille_clique_max, int* sommets_clique, int taille_clique) {
+	// Initialisation si clique pas encore recherchée
+	if (sommets_clique == NULL) {
+		int tab[NOMBRE_DE_SOMMETS];
+		sommets_clique = tab;
+		taille_clique = 0;
+	}
+	// if (*taille_clique_max <= taille_clique) { for (int i = 0; i < taille_clique; ++i) { printf("%d, ", sommets_clique[i]); } printf("\n"); }
+	if (*taille_clique_max < taille_clique) { printf("  Nouvelle clique trouvée ; taille : %d sommets\n", taille_clique); }
+	// Recherche des sommets pas encore dans la clique pouvant appartenir à la clique
+	int suivants[NOMBRE_DE_SOMMETS];
+	int nb_suivants = 0;
+	for (int i = 0; i < NOMBRE_DE_SOMMETS; ++i) {
+		int ajoutable = (ordre_du_sommet(i) > *taille_clique_max) ? 1 : 0;
+		int j = 0;
+		// Vérifie que le sommet i est en lien avec tous les sommets de la clique
+		while (ajoutable == 1 && j < taille_clique) {
+			if (MATRICE_ARETES[i][sommets_clique[j]] == '0') ajoutable = 0;
+			++j;
+		}
+		if (ajoutable == 1) suivants[nb_suivants++] = i;
+	}
+	// Pour chaque sommet pouvant appartenir à la clique, continuer la recherche de la clique avec le sommet
+	for (int i = 0; i < nb_suivants; ++i) {
+		int tmp[taille_clique+1];
+		for (int i = 0; i < taille_clique; ++i) tmp[i] = sommets_clique[i];
+		tmp[taille_clique] = suivants[i];
+		calculer_clique(sommets_clique_max, taille_clique_max, tmp, taille_clique+1);
+	}
+	if (taille_clique > *taille_clique_max) {
+		if (sommets_clique_max != NULL)
+		for (int i = 0; i < taille_clique; ++i) {
+			sommets_clique_max[i] = sommets_clique[i];
+		}
+		*taille_clique_max = taille_clique;
+	}
+}
+
+int clique_genetique(int* res) {
+	int taille_clique_max = 0;
+
+	calculer_clique(res, &taille_clique_max, NULL, 0);
+
+	return taille_clique_max;
+}
+
 int ordre_max() {
 	int max = 0;
 	for(int i=0; i<NOMBRE_DE_SOMMETS; ++i) {

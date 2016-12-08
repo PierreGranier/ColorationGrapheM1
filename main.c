@@ -20,10 +20,6 @@ int main(int argc, char *argv[]) {
 		/* LECTURE DU FICHIER */
 
 		if (choix == -1 || choix == 9) {
-
-			if (NOMBRE_DE_SOMMETS > 0) {
-				liberer_aretes();
-			}
 			
 			if (ok == 2) {
 				strcpy(nom_fichier, argv[1]); // copie de argv[1] dans nom_fichier
@@ -102,7 +98,8 @@ int main(int argc, char *argv[]) {
 			printf("\n\t[2] Colorier avec le deuxième algorithme (sommets triés par leur ordre)");
 			printf("\n\t[3] Colorier avec le troisième algorithme (sommets de la clique en premier)");
 			printf("\n\t[4] Voir la matrice des arêtes");
-			printf("\n\t[5] Calculer la taille de la clique maximum (nombre chromatique)");
+			printf("\n\t[5] Recherche d'une clique maximale");
+			printf("\n\t[6] Recherche de la clique maximale (peu prendre beaucoup de temps)");
 			printf("\n\t[9] Lire un autre graphe");
 			printf("\n\t[10] Quittez le programme\n");
 			ok = scanf("%d", &choix);
@@ -197,7 +194,7 @@ int main(int argc, char *argv[]) {
 				case 5:
 					// http://stackoverflow.com/questions/20654191/c-stack-memory-goto-and-jump-into-scope-of-identifier-with-variably-modified
 					printf("\n########################################");
-					printf("\n# RECHERCHE DE CLIQUE");
+					printf("\n# RECHERCHE D'UNE CLIQUE MAX");
 					printf("\n########################################\n\n");
 					int clique_max;
 					printf("  Premier algorithme en cours de recherche...\n");
@@ -216,6 +213,13 @@ int main(int argc, char *argv[]) {
 						comparaison[2] = clique_max;
 						if (comparaison[2] > comparaison[meilleur_algo-1]) meilleur_algo = 3;
 					printf("  -> Meilleur algorithme : %d\n", meilleur_algo);
+					break;
+				case 6:
+					printf("\n########################################");
+					printf("\n# RECHERCHE DE LA CLIQUE MAX (TEMPS ÉLEVÉ)");
+					printf("\n########################################\n\n");
+					int clique = clique_genetique(NULL);
+					printf("  -> %d sommets\n", clique);
 					break;
 				case 9:
 					puts("");
@@ -238,9 +242,12 @@ int main(int argc, char *argv[]) {
 		} // fin if ok == 0
 	}
 
-	liberer_aretes();
-	liberer_couleurs();
-	// free(nom_fichier);
+	if (NOMBRE_DE_SOMMETS > 0) {
+		liberer_aretes();
+	}
+	if (NOMBRE_DE_COULEURS > 0) {
+		liberer_couleurs();
+	}
 
 	return EXIT_SUCCESS;
 }

@@ -22,6 +22,7 @@ int ordre_du_sommet(int indice);
 int clique_maximum(int* res);
 int clique_maximum2(int* res);
 int clique_maximum3(int* res);
+int clique_genetique(int* res);
 int ordre_max();
 void comparer_verifier_cliques();
 
