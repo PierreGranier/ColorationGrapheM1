@@ -95,7 +95,7 @@ void ajouter_couleur() {
  * Affiche la matrice, avec la possibilité de réduire leur taille pour n'en visualiser qu'un échantillon
  */
 void afficher_couleurs(int pourcentage_visible) {
-	pourcentage_visible = pourcentage_visible % 100;
+	pourcentage_visible = pourcentage_visible % 101;
 
 	printf("\n########################################");
 	printf("\n# MATRICE COULEURS\n# Taille %d x %d (lignes x colonnes)\n# Visualisée à %d %%", NOMBRE_DE_COULEURS, NOMBRE_DE_SOMMETS, pourcentage_visible);

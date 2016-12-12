@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 				printf("\n########################################");
 				printf("\n# Lecture du fichier %s", nom_fichier);
 				
-				char ligne[TAILLE_MAX] = "";
+				char ligne[TAILLE_MAX];
 
 				while (fgets(ligne, TAILLE_MAX, fichier) != NULL) {
 					// puts(ligne);
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 							nb_sommets[i-j] = ligne[i];	// nb_sommet est une chaine
 						}
 						j = ++i; // ++i car il faut passer l'espace avant y
-						for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
+						for(i=i; ligne[i] != ' ' && ligne[i] != '\n'; ++i) { // lecture caractère par caractère de y
 							nb_aretes[i-j] = ligne[i];
 						}
 						NOMBRE_DE_SOMMETS = atoi(nb_sommets);
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 							premier_sommet[i-2] = ligne[i];
 						}
 						int j = ++i;
-						for(i=i; ligne[i] != ' '; ++i) { // lecture caractère par caractère de y
+						for(i=i; ligne[i] != ' ' && ligne[i] != '\n'; ++i) { // lecture caractère par caractère de y
 							deuxieme_sommet[i-j] = ligne[i];
 						}
 						ajouter_arete(atoi(premier_sommet)-1, atoi(deuxieme_sommet)-1);		// le -1 sert parce que le tableau commence à 0 contrairement au num du sommet 
@@ -135,7 +135,7 @@ int main(int argc, char *argv[]) {
 						printf("    %d couleurs\n\n", NOMBRE_DE_COULEURS);
 						comparaison[2] = NOMBRE_DE_COULEURS;
 						if (comparaison[2] < comparaison[meilleur_algo-1]) meilleur_algo = 3;
-					printf("  -> Meilleur algorithme : %d\n\n  Ré-exécution du meilleur algorithme...\n", meilleur_algo);
+					printf("  -> Meilleur algorithme de coloration de graphe : %d\n\n  Ré-exécution du meilleur algorithme...\n", meilleur_algo);
 						liberer_couleurs();
 						initialiser_couleurs();
 						switch (meilleur_algo) { // ré-execution du meilleur algo avant que le xxx_out.txt soit créé
@@ -207,12 +207,7 @@ int main(int argc, char *argv[]) {
 						printf("    %d sommets\n\n", clique_max);
 						comparaison[1] = clique_max;
 						if (comparaison[1] > comparaison[0]) meilleur_algo = 2;
-					printf("  Troisième algorithme en cours de recherche...\n");
-						clique_max = clique_maximum3(NULL);
-						printf("    %d sommets\n\n", clique_max);
-						comparaison[2] = clique_max;
-						if (comparaison[2] > comparaison[meilleur_algo-1]) meilleur_algo = 3;
-					printf("  -> Meilleur algorithme : %d\n", meilleur_algo);
+					printf("  -> Meilleur algorithme de recherche d'une clique max : %d\n", meilleur_algo);
 					break;
 				case 6:
 					printf("\n########################################");
