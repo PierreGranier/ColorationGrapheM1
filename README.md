@@ -29,7 +29,7 @@ Exemple d'utlisation des commandes :
 Nous avons mis en place trois algorithmes de coloration :
 * Approche naïve
 * Coloration des sommets triés par ordre décroissant de leur ordre
-* Coloration des sommets de la clique maximum en priorité
+* Coloration des sommets d'une clique maximum en priorité
 
 Via le menu, il est possible d'executer ces algorithmes :
 * Ensemble - L'algorithme qui aura utilisé le moins de couleurs sera retenu et la coloration du graphe sera enregistrée dans un fichier de sortie
